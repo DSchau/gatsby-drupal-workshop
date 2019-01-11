@@ -1,42 +1,41 @@
-import React, { Component } from "react"
+import React, { Component } from 'react';
 
-import Sidebar from "./sidebar"
-import ScrollSyncSidebar from "./scroll-sync-sidebar"
-import ChevronSvg from "./chevron-svg"
-import presets, { colors } from "../../utils/presets"
-import { rhythm } from "../../utils/typography"
+import Sidebar from './';
+import ScrollSyncSidebar from './scroll-sync-sidebar';
+import ChevronSvg from './chevron-svg';
+import presets, { colors } from './utils/presets';
 import ScrollPositionProvider, {
   ScrollPositionConsumer,
-} from "./scrollbar-position-provider"
+} from './scrollbar-position-provider';
 
 class StickyResponsiveSidebar extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.state = { open: false }
+    this.state = { open: false };
   }
 
   _openSidebar = () => {
-    this.setState({ open: !this.state.open })
-  }
+    this.setState({ open: !this.state.open });
+  };
 
   _closeSidebar = () => {
-    this.setState({ open: false })
-  }
+    this.setState({ open: false });
+  };
 
   render() {
-    const { open } = this.state
+    const { open } = this.state;
     const {
       enableScrollSync,
       location: { pathname },
-    } = this.props
-    const SidebarComponent = enableScrollSync ? ScrollSyncSidebar : Sidebar
+    } = this.props;
+    const SidebarComponent = enableScrollSync ? ScrollSyncSidebar : Sidebar;
 
-    const iconOffset = open ? 5 : -5
-    const menuOpacity = open ? 1 : 0
-    const menuOffset = open ? 0 : rhythm(10)
+    const iconOffset = open ? 5 : -5;
+    const menuOpacity = open ? 1 : 0;
+    const menuOffset = open ? 0 : 100; // TODO
 
-    const sidebarType = pathname.split(`/`)[1]
+    const sidebarType = pathname.split(`/`)[1];
 
     return (
       <ScrollPositionProvider>
@@ -93,11 +92,11 @@ class StickyResponsiveSidebar extends Component {
           </div>
         </div>
       </ScrollPositionProvider>
-    )
+    );
   }
 }
 
-export default StickyResponsiveSidebar
+export default StickyResponsiveSidebar;
 
 const styles = {
   sidebarScrollContainer: {
@@ -116,10 +115,10 @@ const styles = {
       opacity: `1 !important`,
       pointerEvents: `auto`,
       top: `calc(${presets.headerHeight} + ${presets.bannerHeight})`,
-      width: rhythm(10),
+      width: '16.em', // TODO
     },
     [presets.Desktop]: {
-      width: rhythm(12),
+      width: '14em', // TODO
     },
   },
   sidebar: {
@@ -156,4 +155,4 @@ const styles = {
     visibility: `visible`,
     width: 20,
   },
-}
+};
