@@ -2,10 +2,9 @@ import React, { Component } from "react"
 
 import Item from "./item"
 import ExpandAllButton from "./button-expand-all"
-import getActiveItem from "../../utils/sidebar/get-active-item"
-import getActiveItemParents from "../../utils/sidebar/get-active-item-parents"
-import presets, { colors } from "../../utils/presets"
-import { scale, options } from "../../utils/typography"
+import getActiveItem from "./utils/sidebar/get-active-item"
+import getActiveItemParents from "./utils/sidebar/get-active-item-parents"
+import presets, { colors } from "./utils/presets"
 
 // Access to global `localStorage` property must be guarded as it
 // fails under iOS private session mode.
@@ -13,7 +12,7 @@ var hasLocalStorage = true
 var testKey = `gatsbyjs.sidebar.testKey`
 var ls
 try {
-  ls = global.localStorage
+  ls = window.localStorage
   ls.setItem(testKey, `test`)
   ls.removeItem(testKey)
 } catch (e) {
@@ -296,13 +295,13 @@ const styles = {
     margin: 0,
     paddingTop: 20,
     paddingBottom: 104,
-    fontSize: scale(-2 / 10).fontSize,
+    fontSize: 18,
     [presets.Tablet]: {
-      fontSize: scale(-4 / 10).fontSize,
+      fontSize: 20,
       paddingBottom: 20,
     },
     "& a": {
-      fontFamily: options.systemFontFamily.join(`,`),
+      fontFamily: `sans-serif`,
     },
     "& li": {
       margin: 0,

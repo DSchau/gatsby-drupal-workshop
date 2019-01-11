@@ -2,14 +2,12 @@ import React, { Fragment } from "react"
 import GoFold from "react-icons/lib/go/fold"
 import GoUnfold from "react-icons/lib/go/unfold"
 
-import presets, { colors } from "../../utils/presets"
-import { scale, options, rhythm } from "../../utils/typography"
+import presets, { colors } from "./utils/presets"
 
 const ExpandAllButton = ({ onClick, expandAll }) => (
   <button
     onClick={onClick}
     css={{
-      ...scale(-2 / 3),
       lineHeight: 1,
       background: `transparent`,
       border: `none`,
@@ -20,9 +18,9 @@ const ExpandAllButton = ({ onClick, expandAll }) => (
       alignItems: `center`,
       flexGrow: 0,
       marginLeft: `auto`,
-      paddingTop: rhythm(options.blockMarginBottom / 3),
-      paddingBottom: rhythm(options.blockMarginBottom / 3),
-      fontFamily: options.systemFontFamily.join(`,`),
+      paddingTop: `0.5rem`,
+      paddingBottom: `0.5rem`,
+      fontFamily: `sans-serif`,
       textAlign: `left`,
       transition: `all .2s`,
       "&:hover": {

@@ -1,4 +1,21 @@
 {
   "name": "@dschau/sidebar",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "main": "index.cjs.js",
+  "module": "index.js",
+  "peerDependencies": {
+    "@emotion/core": "^10.0.0",
+    "@emotion/css": "^10.0.0",
+    "react": "^16.4.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/preset-env": "^7.2.3",
+    "@emotion/babel-preset-css-prop": "^10.0.6",
+    "rollup": "^1.1.0",
+    "rollup-plugin-babel": "^4.3.0"
+  },
+  "scripts": {
+    "build": "rollup --config"
+  }
 }
