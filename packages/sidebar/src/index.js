@@ -1,316 +1,158 @@
 import React, { Component } from 'react';
 
-import Item from './item';
-import ExpandAllButton from './button-expand-all';
-import getActiveItem from './utils/sidebar/get-active-item';
-import getActiveItemParents from './utils/sidebar/get-active-item-parents';
-import presets, { colors } from './utils/presets';
+import Sidebar from './sidebar';
+import presets from './presets';
+import ScrollSyncSidebar from './scroll-sync-sidebar';
+import ChevronSvg from './chevron-svg';
+import ScrollPositionProvider, {
+  ScrollPositionConsumer,
+} from './scrollbar-position-provider';
 
-// Access to global `localStorage` property must be guarded as it
-// fails under iOS private session mode.
-var hasLocalStorage = true;
-var testKey = `gatsbyjs.sidebar.testKey`;
-var ls;
-try {
-  ls = window.localStorage;
-  ls.setItem(testKey, `test`);
-  ls.removeItem(testKey);
-} catch (e) {
-  hasLocalStorage = false;
-}
+class StickyResponsiveSidebar extends Component {
+  constructor(props) {
+    super(props);
 
-const isItemActive = (activeItemParents, item) => {
-  if (activeItemParents) {
-    for (let parent of activeItemParents) {
-      if (parent === item.title) return true;
-    }
+    this.state = { open: false };
   }
 
-  return false;
-};
+  _openSidebar = () => {
+    this.setState({ open: !this.state.open });
+  };
 
-const getOpenItemHash = (itemList, state) => {
-  for (let item of itemList) {
-    if (item.items) {
-      state.openSectionHash[item.title] =
-        isItemActive(state.activeItemParents, item) ||
-        state.activeItemLink.title === item.title;
-
-      getOpenItemHash(item.items, state);
-    }
-  }
-
-  return false;
-};
-
-class SidebarBody extends Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this._toggleSection = this._toggleSection.bind(this);
-    this.state = { ...this._getInitialState(props) };
-    this.scrollRef = React.createRef();
-  }
-
-  componentDidMount() {
-    const node = this.scrollRef.current;
-
-    if (hasLocalStorage) {
-      const key = this.props.itemList[0].key;
-      const initialState = this.state;
-      const localState = this._readLocalStorage(key);
-
-      if (localState) {
-        const bar = Object.keys(initialState.openSectionHash).filter(function(
-          key
-        ) {
-          return initialState.openSectionHash[key];
-        });
-
-        const state = {
-          ...initialState,
-          openSectionHash: JSON.parse(localState).openSectionHash,
-        };
-
-        for (let item in initialState.openSectionHash) {
-          for (let parent of bar) {
-            if (parent === item) {
-              state.openSectionHash[item] = true;
-            }
-          }
-        }
-
-        state.expandAll = Object.entries(state.openSectionHash).every(
-          k => k[1]
-        );
-        this.setState(state, () => {
-          if (node && this.props.position) {
-            node.scrollTop = this.props.position;
-          }
-        });
-      } else {
-        this._writeLocalStorage(this.state, key);
-      }
-    }
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    if (props.activeItemHash !== state.activeItemHash) {
-      const activeItemLink = getActiveItem(
-        props.itemList,
-        props.location,
-        props.activeItemHash
-      );
-
-      return {
-        activeItemLink: activeItemLink,
-        activeItemParents: getActiveItemParents(
-          props.itemList,
-          activeItemLink,
-          []
-        ),
-        activeItemHash: props.activeItemHash,
-      };
-    }
-
-    return null;
-  }
-
-  _getInitialState(props) {
-    const activeItemLink = getActiveItem(
-      props.itemList,
-      props.location,
-      props.activeItemHash
-    );
-
-    const state = {
-      openSectionHash: {},
-      expandAll: false,
-      key: props.itemList[0].key,
-      activeItemHash: props.activeItemHash,
-      activeItemLink: activeItemLink,
-      activeItemParents: getActiveItemParents(
-        props.itemList,
-        activeItemLink,
-        []
-      ),
-    };
-
-    getOpenItemHash(props.itemList, state);
-    state.expandAll = Object.entries(state.openSectionHash).every(k => k[1]);
-
-    return state;
-  }
-
-  _readLocalStorage(key) {
-    if (hasLocalStorage) {
-      return localStorage.getItem(`gatsbyjs:sidebar:${key}`);
-    } else {
-      return false;
-    }
-  }
-
-  _writeLocalStorage(state, key) {
-    if (hasLocalStorage) {
-      localStorage.setItem(`gatsbyjs:sidebar:${key}`, JSON.stringify(state));
-    }
-  }
-
-  _toggleSection(item) {
-    const { openSectionHash } = this.state;
-
-    const state = {
-      openSectionHash: {
-        ...openSectionHash,
-        [item.title]: !openSectionHash[item.title],
-      },
-    };
-
-    state.expandAll = Object.entries(state.openSectionHash).every(k => k[1]);
-
-    this._writeLocalStorage(state, this.state.key);
-    this.setState(state);
-  }
-
-  _expandAll = () => {
-    if (this.state.expandAll) {
-      this._writeLocalStorage(
-        { openSectionHash: this._getInitialState(this.props).openSectionHash },
-        this.state.key
-      );
-      this.setState({
-        ...this._getInitialState(this.props),
-        expandAll: false,
-      });
-    } else {
-      let openSectionHash = { ...this.state.openSectionHash };
-      Object.keys(openSectionHash).forEach(k => (openSectionHash[k] = true));
-      this._writeLocalStorage({ openSectionHash }, this.state.key);
-      this.setState({ openSectionHash, expandAll: true });
-    }
+  _closeSidebar = () => {
+    this.setState({ open: false });
   };
 
   render() {
-    const { closeSidebar, itemList, location, onPositionChange } = this.props;
-    const { openSectionHash, activeItemLink, activeItemParents } = this.state;
+    const { open } = this.state;
+    const {
+      enableScrollSync,
+      location: { pathname },
+    } = this.props;
+    const SidebarComponent = enableScrollSync ? ScrollSyncSidebar : Sidebar;
+
+    const iconOffset = open ? 5 : -5;
+    const menuOpacity = open ? 1 : 0;
+    const menuOffset = open ? 0 : 40; // rhythm(10);
+
+    const sidebarType = pathname.split(`/`)[1];
 
     return (
-      <section
-        aria-label="Secondary Navigation"
-        id="SecondaryNavigation"
-        className={`docSearch-sidebar ${this.props.className}`}
-        css={{ height: `100%` }}
-      >
-        {!itemList[0].disableExpandAll && (
-          <header css={{ ...styles.utils }}>
-            <ExpandAllButton
-              onClick={this._expandAll}
-              expandAll={this.state.expandAll}
-            />
-          </header>
-        )}
-        <nav
-          onScroll={({ nativeEvent }) => {
-            // get proper scroll position
-            const position = nativeEvent.target.scrollTop;
-            const { pathname } = location;
-            const sidebarType = pathname.split(`/`)[1];
-
-            requestAnimationFrame(() => {
-              onPositionChange(sidebarType, position);
-            });
-          }}
-          ref={this.scrollRef}
+      <ScrollPositionProvider>
+        <div
           css={{
             ...styles.sidebarScrollContainer,
-            height: itemList[0].disableExpandAll
-              ? `100%`
-              : `calc(100% - ${presets.sidebarUtilityHeight})`,
-            [presets.Tablet]: {
-              ...styles.sidebarScrollContainerTablet,
-            },
+            opacity: menuOpacity,
+            pointerEvents: open ? `auto` : `none`,
           }}
         >
-          <ul css={{ ...styles.list }}>
-            {itemList.map((item, index) => (
-              <Item
-                activeItemLink={activeItemLink}
-                activeItemParents={activeItemParents}
-                isActive={openSectionHash[item.title]}
-                item={item}
-                key={index}
-                level={0}
-                location={location}
-                onLinkClick={closeSidebar}
-                onSectionTitleClick={this._toggleSection}
-                openSectionHash={openSectionHash}
-              />
-            ))}
-          </ul>
-        </nav>
-      </section>
+          <div
+            css={{
+              ...styles.sidebar,
+              transform: `translateX(-${menuOffset})`,
+            }}
+          >
+            <ScrollPositionConsumer>
+              {({ positions, onPositionChange }) => (
+                <SidebarComponent
+                  position={positions[sidebarType]}
+                  onPositionChange={onPositionChange}
+                  closeSidebar={this._closeSidebar}
+                  {...this.props}
+                />
+              )}
+            </ScrollPositionConsumer>
+          </div>
+        </div>
+        <div
+          css={{ ...styles.sidebarToggleButton }}
+          onClick={this._openSidebar}
+          role="button"
+          aria-label="Show Secondary Navigation"
+          aria-controls="SecondaryNavigation"
+          aria-expanded={open ? `true` : `false`}
+          tabIndex={0}
+        >
+          <div css={{ ...styles.sidebarToggleButtonInner }}>
+            <ChevronSvg
+              size={15}
+              cssProps={{
+                transform: `translate(${iconOffset}px, 5px) rotate(90deg)`,
+                transition: `transform 0.2s ease`,
+              }}
+            />
+            <ChevronSvg
+              size={15}
+              cssProps={{
+                transform: `translate(${5 -
+                  iconOffset}px, -5px) rotate(270deg)`,
+                transition: `transform 0.2s ease`,
+              }}
+            />
+          </div>
+        </div>
+      </ScrollPositionProvider>
     );
   }
 }
 
-export default SidebarBody;
+export default StickyResponsiveSidebar;
 
 const styles = {
-  utils: {
-    borderRight: `1px solid ${colors.ui.border}`,
-    display: `flex`,
-    alignItems: `center`,
-    height: presets.sidebarUtilityHeight,
-    background: colors.ui.whisper,
-    paddingLeft: 40,
-    paddingRight: 8,
-    borderBottom: `1px solid ${colors.ui.border}`,
-  },
   sidebarScrollContainer: {
-    WebkitOverflowScrolling: `touch`,
-    background: `#fff`,
     border: 0,
+    bottom: 0,
     display: `block`,
-    overflowY: `auto`,
+    height: `100vh`,
+    position: `fixed`,
+    top: 0,
     transition: `opacity 0.5s ease`,
+    width: 320,
     zIndex: 10,
-    borderRight: `1px solid ${colors.ui.border}`,
-    '::-webkit-scrollbar': {
-      height: `6px`,
-      width: `6px`,
-    },
-    '::-webkit-scrollbar-thumb': {
-      background: colors.ui.bright,
-    },
-    '::-webkit-scrollbar-thumb:hover': {
-      background: colors.lilac,
-    },
-    '::-webkit-scrollbar-track': {
-      background: colors.ui.light,
-    },
-  },
-  sidebarScrollContainerTablet: {
-    backgroundColor: colors.ui.whisper,
-    top: `calc(${presets.headerHeight} + ${presets.bannerHeight})`,
-  },
-  list: {
-    margin: 0,
-    paddingTop: 20,
-    paddingBottom: 104,
-    fontSize: 18,
     [presets.Tablet]: {
-      fontSize: 20,
-      paddingBottom: 20,
+      height: `calc(100vh - ${presets.headerHeight} - ${presets.bannerHeight})`,
+      maxWidth: `none`,
+      opacity: `1 !important`,
+      pointerEvents: `auto`,
+      top: `calc(${presets.headerHeight} + ${presets.bannerHeight})`,
+      //      width: rhythm(10)
     },
-    '& a': {
-      fontFamily: `sans-serif`,
+    [presets.Desktop]: {
+      // width: rhythm(12)
     },
-    '& li': {
-      margin: 0,
-      listStyle: `none`,
+  },
+  sidebar: {
+    height: `100%`,
+    transition: `transform 0.5s ease`,
+    boxShadow: `0 0 20px rgba(0, 0, 0, 0.15)`,
+    [presets.Tablet]: {
+      transform: `none !important`,
+      boxShadow: `none`,
     },
-    '& > li:last-child > span:before': {
-      display: `none`,
-    },
+  },
+  sidebarToggleButton: {
+    backgroundColor: '#1fa9f4',
+    borderRadius: `50%`,
+    bottom: 64,
+    boxShadow: `0 0 20px rgba(0, 0, 0, 0.3)`,
+    cursor: `pointer`,
+    display: `flex`,
+    height: 60,
+    justifyContent: `space-around`,
+    position: `fixed`,
+    right: 20,
+    visibility: `visible`,
+    width: 60,
+    zIndex: 20,
+    [presets.Tablet]: { display: `none` },
+  },
+  sidebarToggleButtonInner: {
+    alignSelf: `center`,
+    color: `#fff`,
+    display: `flex`,
+    flexDirection: `column`,
+    height: 20,
+    visibility: `visible`,
+    width: 20,
   },
 };

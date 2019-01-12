@@ -1,5 +1,9 @@
 {
-  "name": "root",
+  "name": "gatsby-drupal-workshop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Dustin Schau <dustinschau@gmail.com>",
+  "license": "MIT",
   "private": true,
   "devDependencies": {
     "eslint": "^5.12.0",
@@ -19,12 +23,9 @@
     "lerna": "^3.4.3",
     "lint-staged": "^8.1.0"
   },
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "Dustin Schau <dustinschau@gmail.com>",
-  "license": "MIT",
   "scripts": {
-    "build": "lerna run build --scope=@dschau/gatsby-app-*"
+    "build": "lerna run build --scope=@dschau/gatsby-app-*",
+    "publish": "lerna publish"
   },
   "workspaces": [
     "apps/*",

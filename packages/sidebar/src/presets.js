@@ -1,9 +1,4 @@
-import colors from './colors'
-
-export { colors }
-
 export default {
-  colors,
   mobile: `(min-width: 400px)`,
   Mobile: `@media (min-width: 400px)`,
   phablet: `(min-width: 550px)`,
@@ -36,8 +31,8 @@ export default {
     speedSlow: `350ms`,
   },
   logoOffset: 1.8,
-  headerHeight: `3.5rem`,
-  bannerHeight: `2.5rem`,
+  headerHeight: `50px`,
+  bannerHeight: `0px`,
   sidebarUtilityHeight: `2.5rem`,
   pageHeadingDesktopWidth: `3.5rem`,
-}
+};

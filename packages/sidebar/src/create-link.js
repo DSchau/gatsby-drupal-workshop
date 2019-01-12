@@ -1,10 +1,9 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from 'react';
+import { Link } from 'gatsby';
+import presets from './presets';
 
-import presets, { colors } from "../presets"
-
-const _getTitle = (title, isDraft) => (isDraft ? title.slice(0, -1) : title)
-const _isDraft = title => title.slice(-1) === `*`
+const _getTitle = (title, isDraft) => (isDraft ? title.slice(0, -1) : title);
+const _isDraft = title => title.slice(-1) === `*`;
 
 const createLink = ({
   item,
@@ -14,8 +13,8 @@ const createLink = ({
   stepsUI,
   customCSS,
 }) => {
-  const isDraft = _isDraft(item.title)
-  const title = _getTitle(item.title, isDraft)
+  const isDraft = _isDraft(item.title);
+  const title = _getTitle(item.title, isDraft);
 
   return (
     <span
@@ -23,8 +22,8 @@ const createLink = ({
         display: `flex`,
         alignItems: `center`,
         position: `relative`,
-        "&:before": {
-          background: colors.ui.border,
+        '&:before': {
+          background: '#ede7f3',
           bottom: 0,
           top: `auto`,
           content: `''`,
@@ -50,8 +49,8 @@ const createLink = ({
         {title}
       </Link>
     </span>
-  )
-}
+  );
+};
 
 const bulletOffset = {
   default: {
@@ -61,32 +60,32 @@ const bulletOffset = {
   desktop: {
     top: `1.2em`,
   },
-}
+};
 
-const bulletSize = 8
+const bulletSize = 8;
 
 const styles = {
   draft: {
-    "&&": {
-      color: colors.gray.calm,
+    '&&': {
+      color: 'gray', // TODO: change this
     },
   },
   parentOfActiveLink: {
-    "&&": {
-      color: colors.gatsby,
+    '&&': {
+      color: '#1fa9f4',
       fontWeight: `bold`,
     },
   },
   activeLink: {
-    "&&": {
-      color: colors.gatsby,
+    '&&': {
+      color: '#1fa9f4',
       fontWeight: `bold`,
     },
-    "&:before": {
-      background: colors.gatsby,
+    '&:before': {
+      background: '#1fa9f4',
       transform: `scale(1)`,
     },
-    "&:after": {
+    '&:after': {
       width: 200,
       opacity: 1,
     },
@@ -99,28 +98,26 @@ const styles = {
     position: `relative`,
     zIndex: 1,
     width: `100%`,
-    "&&": {
+    '&&': {
       border: 0,
       boxShadow: `none`,
       fontWeight: `normal`,
-      "&:hover": {
+      '&:hover': {
         background: `transparent`,
-        color: colors.gatsby,
-        "&:before": {
-          background: colors.gatsby,
+        color: '#1fa9f4',
+        '&:before': {
+          background: '#1fa9f4',
           transform: `scale(1)`,
         },
       },
     },
-    "&:before, &:after": {
+    '&:before, &:after': {
       ...bulletOffset.default,
       height: bulletSize,
       position: `absolute`,
-      transition: `all ${presets.animation.speedDefault} ${
-        presets.animation.curveDefault
-      }`,
+      transition: `all 250ms cubic-bezier(0.4, 0, 0.2, 1)`,
     },
-    "&:before": {
+    '&:before': {
       borderRadius: `100%`,
       content: `''`,
       transform: `scale(0.1)`,
@@ -129,8 +126,8 @@ const styles = {
         ...bulletOffset.desktop,
       },
     },
-    "&:after": {
-      background: colors.gatsby,
+    '&:after': {
+      background: '#1fa9f4',
       borderRadius: 4,
       content: `''`,
       left: bulletOffset.default.left + 7,
@@ -145,7 +142,7 @@ const styles = {
   subsectionLink: {
     ...bulletOffset.default,
     background: `#fff`,
-    border: `1px solid ${colors.ui.bright}`,
+    border: `1px solid gray`, // TODO: change this
     borderRadius: `100%`,
     display: `block`,
     fontWeight: `normal`,
@@ -157,6 +154,6 @@ const styles = {
       ...bulletOffset.desktop,
     },
   },
-}
+};
 
-export default createLink
+export default createLink;

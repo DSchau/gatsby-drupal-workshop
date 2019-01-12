@@ -1,9 +1,8 @@
-import React from "react"
+import React from 'react';
 
-import ChevronSvg from "./chevron-svg"
-import { colors } from "./utils/presets"
+import ChevronSvg from './chevron-svg';
 
-const paddingLeft = level => (level === 0 ? level + 1 * 40 : level + 1 * 20)
+const paddingLeft = level => (level === 0 ? level + 1 * 40 : level + 1 * 20);
 
 const Chevron = ({ isExpanded }) => (
   <span
@@ -15,7 +14,7 @@ const Chevron = ({ isExpanded }) => (
       minHeight: 40,
       position: `relative`,
       width: 40,
-      "&:before": {
+      '&:before': {
         ...styles.ulHorizontalDivider,
         bottom: 0,
         left: `0 !important`,
@@ -25,7 +24,7 @@ const Chevron = ({ isExpanded }) => (
   >
     <ChevronSvg
       cssProps={{
-        color: isExpanded ? colors.lilac : colors.ui.bright,
+        color: isExpanded ? '#8c65b3' : '#8c65b3',
         marginLeft: `auto`,
         marginRight: `auto`,
         transform: isExpanded ? `rotateX(180deg)` : `rotateX(0deg)`,
@@ -33,7 +32,7 @@ const Chevron = ({ isExpanded }) => (
       }}
     />
   </span>
-)
+);
 
 const TitleButton = ({
   isActive,
@@ -53,7 +52,7 @@ const TitleButton = ({
       paddingLeft: level === 0 ? 40 : 0,
       paddingRight: `0 !important`,
       minHeight: 40,
-      "&:before": {
+      '&:before': {
         ...styles.ulHorizontalDivider,
         bottom: 0,
         left: level === 0 ? 40 : 0,
@@ -67,7 +66,7 @@ const TitleButton = ({
       <Chevron isExpanded={isExpanded} />
     </SectionTitle>
   </button>
-)
+);
 
 const SplitButton = ({
   createLink,
@@ -93,7 +92,7 @@ const SplitButton = ({
     <span
       css={{
         flexGrow: 1,
-        borderRight: `1px solid ${colors.ui.border}`,
+        borderRight: `1px solid #ede7f3`,
       }}
     >
       {createLink({
@@ -106,9 +105,9 @@ const SplitButton = ({
         customCSS:
           level === 0
             ? {
-                "&&": {
+                '&&': {
                   ...styles.smallCaps,
-                  color: isExpanded ? colors.gatsby : false,
+                  color: isExpanded ? '#1fa9f4' : false,
                   fontWeight: isActive ? `bold` : `normal`,
                 },
               }
@@ -122,7 +121,7 @@ const SplitButton = ({
       css={{
         ...styles.resetButton,
         marginLeft: `auto`,
-        "&:hover": {
+        '&:hover': {
           background: `white`,
         },
       }}
@@ -131,7 +130,7 @@ const SplitButton = ({
       <Chevron isExpanded={isExpanded} />
     </button>
   </span>
-)
+);
 
 const Title = ({ title, level, isActive, isExpanded }) => (
   <div
@@ -151,29 +150,29 @@ const Title = ({ title, level, isActive, isExpanded }) => (
       {title}
     </SectionTitle>
   </div>
-)
+);
 
 const SectionTitle = ({ children, isExpanded, isActive, disabled, level }) => (
   <h3
     css={{
       alignItems: `center`,
       display: `flex`,
-      fontFamily: `sans-serif`,
+      //      fontFamily: options.systemFontFamily.join(`,`),
       fontSize: `100%`,
       fontWeight: isActive ? `bold` : `normal`,
       margin: 0,
       ...(level === 0 && { ...styles.smallCaps }),
-      color: isExpanded ? colors.gatsby : false,
-      "&:hover": {
-        color: disabled ? false : colors.gatsby,
+      color: isExpanded ? '#1fa9f4' : false,
+      '&:hover': {
+        color: disabled ? false : '#1fa9f4',
       },
     }}
   >
     {children}
   </h3>
-)
+);
 
-export { Title, TitleButton, SplitButton }
+export { Title, TitleButton, SplitButton };
 
 const styles = {
   resetButton: {
@@ -188,7 +187,7 @@ const styles = {
     width: `100%`,
   },
   ulHorizontalDivider: {
-    background: colors.ui.border,
+    background: '#ede7f3',
     top: 0,
     content: `''`,
     height: 1,
@@ -197,8 +196,8 @@ const styles = {
     left: 40,
   },
   smallCaps: {
-    fontFamily: `sans-serif`,
+    //    fontFamily: options.headerFontFamily.join(`,`),
     letterSpacing: `.075em`,
     textTransform: `uppercase`,
   },
-}
+};

@@ -4,8 +4,15 @@
     "apps/*"
   ],
   "command": {
-    "run": {
-      "npmClient": "yarn"
+    "create": {
+      "license": "MIT"
+    },
+    "publish": {
+      "allowBranch": "master",
+      "bump": "patch",
+      "conventionalCommits": true,
+      "message": "chore(release): Publish",
+      "ignoreChanges": ["CHANGELOG.md"]
     }
   },
   "version": "0.0.0"

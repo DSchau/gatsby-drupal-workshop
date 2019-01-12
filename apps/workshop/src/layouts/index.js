@@ -1,6 +1,7 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
+import Sidebar from '@dschau/sidebar'
 
 import { Navigation } from '../components/navigation'
 
@@ -28,6 +29,10 @@ const Layout = ({ children, location }) => (
     render={data => (
       <React.Fragment>
         <Navigation />
+        <Sidebar
+          itemList={data.sidebar.edges.map(({ node }) => node)}
+          location={location}
+        />
         <div
           css={css`
             display: flex;

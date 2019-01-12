@@ -1,26 +1,14 @@
 import babel from 'rollup-plugin-babel'
 
-const base = {
+const config = {
   input: 'src/index.js',
+  output: {
+    file: 'index.js',
+    format: 'cjs'
+  },
   plugins: [
     babel()
   ]
 }
-
-const config = [
-  {
-    output: {
-      file: 'index.js',
-      format: 'es'
-    }
-  },
-  {
-    output: {
-      file: 'index.cjs.js',
-      format: 'cjs'
-    }
-  }
-]
-  .map(output => Object.assign({}, base, output))
 
 export default config

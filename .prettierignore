@@ -1,3 +1,4 @@
 # ignore built packages
 packages/**/*.js
+packages/*/es/**/*.js
 !packages/*/src/**/*.js

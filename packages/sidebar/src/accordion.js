@@ -1,10 +1,9 @@
-import React, { Fragment } from "react"
+import React, { Fragment } from 'react';
 
-import Item from "./item"
-import { Title, TitleButton, SplitButton } from "./section-title"
-import { colors } from "./utils/presets"
+import Item from './item';
+import { Title, TitleButton, SplitButton } from './section-title';
 
-const paddingLeft = level => (level === 0 ? level + 1 * 40 : level + 1 * 20)
+const paddingLeft = level => (level === 0 ? level + 1 * 40 : level + 1 * 20);
 
 const ItemWithSubitems = ({
   activeItemLink,
@@ -18,8 +17,8 @@ const ItemWithSubitems = ({
   onSectionTitleClick,
   uid,
 }) => {
-  const SectionTitleComponent = item.disableAccordions ? Title : TitleButton
-  const isActive = item.link === activeItemLink.link
+  const SectionTitleComponent = item.disableAccordions ? Title : TitleButton;
+  const isActive = item.link === activeItemLink.link;
 
   return (
     <Fragment>
@@ -49,27 +48,27 @@ const ItemWithSubitems = ({
         />
       )}
     </Fragment>
-  )
-}
+  );
+};
 
 class Accordion extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       uid: (`` + Math.random()).replace(/\D/g, ``),
-    }
+    };
 
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(...args) {
     if (this.props.onLinkClick) {
-      this.props.onLinkClick(...args)
+      this.props.onLinkClick(...args);
     }
 
     if (this.props.onSectionTitleClick) {
-      this.props.onSectionTitleClick(...args)
+      this.props.onSectionTitleClick(...args);
     }
   }
 
@@ -86,15 +85,14 @@ class Accordion extends React.Component {
       onLinkClick,
       onSectionTitleClick,
       openSectionHash,
-    } = this.props
-    const uid = `item_` + this.state.uid
-    const isExpanded = openSectionHash[item.title] || item.disableAccordions
+    } = this.props;
+    const uid = `item_` + this.state.uid;
+    const isExpanded = openSectionHash[item.title] || item.disableAccordions;
 
     return (
       <li
         css={{
-          background:
-            isExpanded && isActive && level > 0 ? colors.ui.light : false,
+          background: isExpanded && isActive && level > 0 ? '#f5f3f7' : false,
           position: `relative`,
         }}
       >
@@ -118,7 +116,7 @@ class Accordion extends React.Component {
             ...styles.ul,
             display: isExpanded ? `block` : `none`,
             paddingBottom: level === 0 && isExpanded ? 40 : false,
-            "& li": {
+            '& li': {
               paddingLeft: paddingLeft(level),
             },
           }}
@@ -146,24 +144,24 @@ class Accordion extends React.Component {
           ))}
         </ul>
       </li>
-    )
+    );
   }
 }
 
-export default Accordion
+export default Accordion;
 
 const styles = {
   ul: {
     listStyle: `none`,
     margin: 0,
     position: `relative`,
-    "& li": {
+    '& li': {
       marginBottom: 0,
     },
   },
   ulStepsUI: {
-    "&:after": {
-      background: colors.ui.bright,
+    '&:after': {
+      background: '#e0d6eb',
       bottom: `1.5rem`,
       content: `''`,
       left: 0,
@@ -171,8 +169,8 @@ const styles = {
       top: `1.5rem`,
       width: 1,
     },
-    "&:before": {
-      borderLeft: `1px dashed ${colors.ui.bright}`,
+    '&:before': {
+      borderLeft: `1px dashed #e0d6eb`,
       bottom: 0,
       content: `''`,
       height: `100%`,
@@ -181,4 +179,4 @@ const styles = {
       width: 0,
     },
   },
-}
+};

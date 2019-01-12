@@ -1,57 +1,58 @@
-import React, { Fragment } from "react"
-import GoFold from "react-icons/lib/go/fold"
-import GoUnfold from "react-icons/lib/go/unfold"
-
-import presets, { colors } from "./utils/presets"
+import React, { Fragment } from 'react';
+import { GoFold, GoUnfold } from 'react-icons/go';
 
 const ExpandAllButton = ({ onClick, expandAll }) => (
   <button
     onClick={onClick}
     css={{
+      //      ...scale(-2 / 3),
       lineHeight: 1,
       background: `transparent`,
       border: `none`,
-      borderRadius: presets.radius,
-      color: colors.gatsby,
+      borderRadius: '3px',
+      color: '#edaf3d',
       display: `flex`,
       cursor: `pointer`,
       alignItems: `center`,
       flexGrow: 0,
       marginLeft: `auto`,
-      paddingTop: `0.5rem`,
-      paddingBottom: `0.5rem`,
-      fontFamily: `sans-serif`,
+      //      paddingTop: rhythm(options.blockMarginBottom / 3),
+      //      paddingBottom: rhythm(options.blockMarginBottom / 3),
+      //      fontFamily: options.systemFontFamily.join(`,`),
       textAlign: `left`,
       transition: `all .2s`,
-      "&:hover": {
-        background: colors.ui.bright,
+      '&:hover': {
+        background: '#e0d6eb',
       },
     }}
   >
     {expandAll ? (
       <Fragment>
         <span>Collapse All</span>
-        <span css={{ ...styles.icon }}>
+        <Icon>
           <GoFold />
-        </span>
+        </Icon>
       </Fragment>
     ) : (
       <Fragment>
         <span>Expand All</span>
-        <span css={{ ...styles.icon }}>
+        <Icon>
           <GoUnfold />
-        </span>
+        </Icon>
       </Fragment>
     )}
   </button>
-)
+);
 
-export default ExpandAllButton
+export default ExpandAllButton;
 
-const styles = {
-  icon: {
-    display: `inline-block`,
-    fontSize: `.9rem`,
-    marginLeft: 8,
-  },
-}
+const Icon = props => (
+  <span
+    {...props}
+    css={{
+      display: `inline-block`,
+      fontSize: `.9rem`,
+      marginLeft: 8,
+    }}
+  />
+);
