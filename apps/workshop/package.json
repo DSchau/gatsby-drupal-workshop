@@ -2,7 +2,7 @@
   "name": "@dschau/gatsby-app-workshop",
   "private": true,
   "description": "The Gatsby + Drupal workshop for DrupalCamp",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "author": "Dustin Schau <dustin@gatsbyjs.com>",
   "dependencies": {
     "@emotion/core": "^10.0.6",

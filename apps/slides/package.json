@@ -1,8 +1,9 @@
 {
   "name": "@dschau/gatsby-app-slides",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "index.js",
+  "author": "Dustin Schau <dustin@gatsbyjs.com>",
   "license": "MIT",
   "scripts": {
     "build": "mdx-deck build deck.js --webpack webpack.config.js",
