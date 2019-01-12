@@ -1,64 +1,74 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import styled from '@emotion/styled'
 import { StaticQuery, graphql } from 'gatsby'
-import SidebarComponent from '@dschau/sidebar'
+import { css } from '@emotion/core'
 
-import Header from '../components/header'
-
-const Container = styled.div``
-
-const Sidebar = styled(SidebarComponent)`
-  position: fixed;
-  top: 92px;
-  left: 0;
-  width: 16.8em;
-`
-
-const Content = styled.div`
-  padding-left: 16.8em;
-`
+import { Navigation } from '../components/navigation'
 
 const Layout = ({ children, location }) => (
   <StaticQuery
     query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
+      {
+        sidebar: allSidebarYaml {
+          edges {
+            node {
+              title
+              items {
+                title
+                link
+                items {
+                  link
+                  title
+                }
+              }
+            }
           }
         }
       }
     `}
     render={data => (
-      <Container>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <Sidebar
-          itemList={[
-            {
-              items: [
-                {
-                  hash: false,
-                  link: '/docs/',
-                  parentTitle: 'Documentation',
-                  title: 'Introduction',
-                },
-              ],
-              key: 'documentation',
-              title: 'Documentation',
-            },
-          ]}
-          key="asdf"
-          location={location}
-        />
-        <Content>{children}</Content>
-      </Container>
+      <React.Fragment>
+        <Navigation />
+        <div
+          css={css`
+            display: flex;
+            justify-content: space-between;
+            @media only screen and (max-width: 50rem) {
+              display: block;
+            }
+          `}
+        >
+          <main
+            css={css`
+              display: flex;
+              flex-grow: 1;
+              justify-content: center;
+              margin: 0;
+              padding-left: 20rem;
+              width: 100%;
+              @media only screen and (max-width: 50rem) {
+                padding-left: 0;
+              }
+            `}
+          >
+            <div
+              css={css`
+                max-width: 100%;
+                width: 50rem;
+                padding: 0 2rem;
+                margin-top: 50px;
+                @media only screen and (max-width: 50rem) {
+                  width: 100%;
+                  position: relative;
+                }
+              `}
+            >
+              {children}
+            </div>
+          </main>
+        </div>
+      </React.Fragment>
     )}
   />
 )
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
 
 export default Layout
