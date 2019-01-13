@@ -5,71 +5,73 @@ import Sidebar from '@dschau/sidebar'
 
 import { Navigation } from '../components/navigation'
 
-const Layout = ({ children, location }) => (
-  <StaticQuery
-    query={graphql`
-      {
-        sidebar: allSidebarYaml {
-          edges {
-            node {
-              title
-              items {
+function Layout({ children, location }) {
+  return (
+    <StaticQuery
+      query={graphql`
+        {
+          sidebar: allSidebarYaml {
+            edges {
+              node {
                 title
-                link
+                items {
+                  title
+                  link
+                }
               }
             }
           }
         }
-      }
-    `}
-    render={data => (
-      <React.Fragment>
-        <Navigation />
-        <Sidebar
-          itemList={data.sidebar.edges.map(({ node }) => node)}
-          location={location}
-        />
-        <div
-          css={css`
-            display: flex;
-            justify-content: space-between;
-            @media only screen and (max-width: 50rem) {
-              display: block;
-            }
-          `}
-        >
-          <main
+      `}
+      render={data => (
+        <React.Fragment>
+          <Navigation />
+          <Sidebar
+            itemList={data.sidebar.edges.map(({ node }) => node)}
+            location={location}
+          />
+          <div
             css={css`
               display: flex;
-              flex-grow: 1;
-              justify-content: center;
-              margin: 0;
-              padding-left: 20rem;
-              width: 100%;
+              justify-content: space-between;
               @media only screen and (max-width: 50rem) {
-                padding-left: 0;
+                display: block;
               }
             `}
           >
-            <div
+            <main
               css={css`
-                max-width: 100%;
-                width: 50rem;
-                padding: 0 2rem;
-                margin-top: 50px;
+                display: flex;
+                flex-grow: 1;
+                justify-content: center;
+                margin: 0;
+                padding-left: 20rem;
+                width: 100%;
                 @media only screen and (max-width: 50rem) {
-                  width: 100%;
-                  position: relative;
+                  padding-left: 0;
                 }
               `}
             >
-              {children}
-            </div>
-          </main>
-        </div>
-      </React.Fragment>
-    )}
-  />
-)
+              <div
+                css={css`
+                  max-width: 100%;
+                  width: 50rem;
+                  padding: 0 2rem;
+                  margin-top: 50px;
+                  @media only screen and (max-width: 50rem) {
+                    width: 100%;
+                    position: relative;
+                  }
+                `}
+              >
+                {children}
+              </div>
+            </main>
+          </div>
+        </React.Fragment>
+      )}
+    />
+  )
+}
 
 export default Layout
