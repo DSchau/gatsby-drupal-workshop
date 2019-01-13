@@ -292,16 +292,11 @@ const styles = {
   },
   list: {
     margin: 0,
+    paddingLeft: 0,
     paddingTop: 20,
     paddingBottom: 104,
-    //    fontSize: scale(-2 / 10).fontSize,
-    [presets.Tablet]: {
-      //      fontSize: scale(-4 / 10).fontSize,
-      paddingBottom: 20,
-    },
-    '& a': {
-      //      fontFamily: options.systemFontFamily.join(`,`)
-    },
+    fontSize: 18,
+    fontFamily: `sans-serif`,
     '& li': {
       margin: 0,
       listStyle: `none`,
