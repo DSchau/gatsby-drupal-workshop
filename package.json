@@ -25,6 +25,7 @@
   },
   "scripts": {
     "build": "lerna run build --scope=@dschau/gatsby-app-*",
+    "watch": "lerna run watch --scope=@dschau/sidebar",
     "publish": "lerna publish"
   },
   "workspaces": [

@@ -200,14 +200,12 @@ class SidebarBody extends Component {
         id="SecondaryNavigation"
         css={{ height: `100%` }}
       >
-        {!itemList[0].disableExpandAll && (
-          <header css={{ ...styles.utils }}>
-            <ExpandAllButton
-              onClick={this._expandAll}
-              expandAll={this.state.expandAll}
-            />
-          </header>
-        )}
+        <header css={{ ...styles.utils }}>
+          <ExpandAllButton
+            onClick={this._expandAll}
+            expandAll={this.state.expandAll}
+          />
+        </header>
         <nav
           onScroll={({ nativeEvent }) => {
             // get proper scroll position

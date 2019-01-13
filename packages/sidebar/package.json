@@ -22,7 +22,8 @@
     "build": "npm run build:es && npm run build:cjs",
     "build:es": "babel src --out-dir es",
     "build:cjs": "rollup --config",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "watch": "npm run build:cjs -- --watch"
   },
   "dependencies": {
     "gray-percentage": "^2.0.0"
