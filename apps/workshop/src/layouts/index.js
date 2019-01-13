@@ -16,10 +16,6 @@ const Layout = ({ children, location }) => (
               items {
                 title
                 link
-                items {
-                  link
-                  title
-                }
               }
             }
           }

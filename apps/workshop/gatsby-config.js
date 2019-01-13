@@ -4,7 +4,7 @@ module.exports = {
   siteMetadata: {
     title: `Gatsby Drupal Workshop`,
     description: `A workshop to dive deep into Gatsby and Drupal`,
-    author: `@gatsbyjs`,
+    author: `@schaudustin`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -26,12 +26,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-transformer-yaml`,
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [`gatsby-remark-prismjs`],
-      },
-    },
+    `gatsby-mdx`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
