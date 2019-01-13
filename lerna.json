@@ -1,7 +1,7 @@
 {
   "packages": [
-    "packages/*",
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "command": {
     "create": {
@@ -12,8 +12,10 @@
       "bump": "patch",
       "conventionalCommits": true,
       "message": "chore(release): Publish",
-      "ignoreChanges": ["CHANGELOG.md"]
+      "ignoreChanges": [
+        "CHANGELOG.md"
+      ]
     }
   },
-  "version": "0.0.0"
+  "version": "0.0.1"
 }
