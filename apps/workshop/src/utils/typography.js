@@ -17,9 +17,17 @@ const headerFontFamily = [
   `sans-serif`,
 ];
 
+const bodyFontFamily = [
+  `Spectral`,
+  `Georgia`,
+  `Times New Roman`,
+  `Times`,
+  `serif`,
+];
+
 const options = {
   headerFontFamily,
-  bodyFontFamily: [`Spectral`, `Georgia`, `Times New Roman`, `Times`, `serif`],
+  bodyFontFamily,
   baseLineHeight: 1.4,
   baseFontSize: `16px`,
   headerLineHeight: 1.075,
@@ -29,5 +37,7 @@ const options = {
   scaleRatio: 2,
   plugins: [new CodePlugin()],
 };
+
+export { headerFontFamily, bodyFontFamily };
 
 export default new Typography(options);

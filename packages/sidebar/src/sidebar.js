@@ -4,7 +4,7 @@ import Item from './item';
 import ExpandAllButton from './button-expand-all';
 import getActiveItem from './get-active-item';
 import getActiveItemParents from './get-active-item-parents';
-import presets from './presets';
+import presets, { fonts } from './presets';
 
 // Access to global `localStorage` property must be guarded as it
 // fails under iOS private session mode.
@@ -296,7 +296,9 @@ const styles = {
     paddingTop: 20,
     paddingBottom: 104,
     fontSize: 18,
-    fontFamily: `sans-serif`,
+    '& a': {
+      fontFamily: fonts.system.join(`,`),
+    },
     '& li': {
       margin: 0,
       listStyle: `none`,
