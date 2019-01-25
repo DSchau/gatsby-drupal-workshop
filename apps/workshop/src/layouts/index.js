@@ -1,9 +1,9 @@
-import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
-import { css } from '@emotion/core'
-import Sidebar from '@dschau/sidebar'
+import React from 'react';
+import { StaticQuery, graphql } from 'gatsby';
+import { css } from '@emotion/core';
+import Sidebar from '@dschau/sidebar';
 
-import { Navigation } from '../components/navigation'
+import { Navigation } from '../components/navigation';
 
 function Layout({ children, location }) {
   return (
@@ -56,7 +56,7 @@ function Layout({ children, location }) {
                 css={css`
                   max-width: 100%;
                   width: 50rem;
-                  padding: 0 2rem;
+                  padding: 2rem;
                   margin-top: 50px;
                   @media only screen and (max-width: 50rem) {
                     width: 100%;
@@ -71,7 +71,7 @@ function Layout({ children, location }) {
         </React.Fragment>
       )}
     />
-  )
+  );
 }
 
-export default Layout
+export default Layout;

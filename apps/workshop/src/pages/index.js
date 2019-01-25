@@ -1,18 +1,28 @@
-import React from 'react'
+import React from 'react';
+import { graphql } from 'gatsby';
+import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 
-import Image from '../components/image'
-import SEO from '../components/seo'
+import SEO from '../components/seo';
+import Image from '../components/image';
 
-const IndexPage = () => (
+const IndexPage = ({ data }) => (
   <React.Fragment>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
+    <MDXRenderer>{data.index.childMdx.code.body}</MDXRenderer>
+    <Image css={{ maxWidth: 300, margin: '1rem auto' }} />
   </React.Fragment>
-)
+);
 
-export default IndexPage
+export const indexQuery = graphql`
+  query IndexQuery {
+    index: file(relativePath: { eq: "index.mdx" }) {
+      childMdx {
+        code {
+          body
+        }
+      }
+    }
+  }
+`;
+
+export default IndexPage;
