@@ -6972,15 +6972,15 @@ gatsby-link@^2.0.8:
     "@types/reach__router" "^1.0.0"
     prop-types "^15.6.1"
 
-gatsby-mdx-theme@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/gatsby-mdx-theme/-/gatsby-mdx-theme-0.0.4.tgz#b3b3d38ebf6055d697cc5ed2d27a00adda23d878"
-  integrity sha512-6+nLTLPnsgJIx1VSNqndqX2iYbdJxggZcigk6FWdyU4pOBW+pBXxJCfeoV2h4lYi7v7koeCRjLaRYq1Vi1MztQ==
+gatsby-mdx-theme@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/gatsby-mdx-theme/-/gatsby-mdx-theme-0.0.6.tgz#208755da01c12630a857cf961d430b6f0b0078f5"
+  integrity sha512-e/dHTfNMjMF9syLUdwUuFEuwceyWdV9MsLYn6x2jnRN2FfDVn2wPyoQGDS+WJ7XuUYP5frcL5wddeNk/Mw3YNA==
 
-gatsby-mdx@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/gatsby-mdx/-/gatsby-mdx-0.3.3.tgz#5379d35b377b4a71d098a6a9aec86145a25f2d07"
-  integrity sha512-v9v3DNMgRUaiEsAeOlbO7QSYiFN63ZDKehwwiyw1We+Rzw3rdZ6Kc+IqcLK3FBXTX4VXLDLyDjVFcO6hhBkwIg==
+gatsby-mdx@^0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/gatsby-mdx/-/gatsby-mdx-0.3.5.tgz#ed5fc2ad5f28b9b789c4202c77fd3ac6e6eb3adf"
+  integrity sha512-dJWrcaEtwn37kLd/baL9N/QL9laxJYkU849LRyzJp5zudS4bPPP2XUhzpHp35e67d2M80u3hOSma3bDQvWswBg==
   dependencies:
     "@babel/plugin-proposal-object-rest-spread" "^7.0.0"
     debug "^4.0.1"
