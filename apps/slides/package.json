@@ -6,7 +6,7 @@
   "author": "Dustin Schau <dustin@gatsbyjs.com>",
   "license": "MIT",
   "scripts": {
-    "build": "mdx-deck build deck.js --webpack webpack.config.js",
+    "build": "mdx-deck build deck.js --webpack webpack.config.js --no-html",
     "postbuild": "npm run build:pdf && cp -r dist/. ../workshop/public/slides",
     "build:pdf": "mdx-deck pdf deck.js",
     "start": "mdx-deck deck.js --webpack webpack.config.js"
