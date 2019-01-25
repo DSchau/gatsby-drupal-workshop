@@ -2,5 +2,13 @@
   link: /slides/
 - title: Labs
   items:
-    - title: Set Up
+    - title: 01 - Set Up
       link: /labs/01-setup/
+    - title: 02 - Querying Drupal
+      link: /labs/02-querying-drupal/
+    - title: 03 - Using Gatsby Image
+      link: /labs/03-using-gatsby-image/
+    - title: 04 - Authenticated Content
+      link: /labs/04-authenticated-content/
+    - title: 05 - Deploying
+      link: /labs/05-deploying/

@@ -1,4 +1,4 @@
-const path = require(`path`)
+const path = require(`path`);
 
 module.exports = {
   siteMetadata: {
@@ -10,6 +10,12 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-layout`,
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography`,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -44,4 +50,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
   ],
-}
+};
