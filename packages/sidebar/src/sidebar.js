@@ -295,7 +295,7 @@ const styles = {
     paddingLeft: 0,
     paddingTop: 20,
     paddingBottom: 104,
-    fontSize: 18,
+    fontSize: 16,
     '& a': {
       fontFamily: fonts.system.join(`,`),
     },
