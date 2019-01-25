@@ -1,7 +1,7 @@
 {
   "name": "@dschau/gatsby-app-slides",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "author": "Dustin Schau <dustin@gatsbyjs.com>",
   "license": "MIT",
