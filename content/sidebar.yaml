@@ -1,9 +1,9 @@
-- title: Slides
-  link: /slides/
+- title: Set Up
+  link: /set-up/
 - title: Labs
   items:
     - title: 01 - Set Up
-      link: /labs/01-setup/
+      link: /labs/01-set-up/
     - title: 02 - Querying Drupal
       link: /labs/02-querying-drupal/
     - title: 03 - Using Gatsby Image

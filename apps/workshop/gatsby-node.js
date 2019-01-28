@@ -1,5 +1,5 @@
-const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const path = require(`path`);
+const { createFilePath } = require(`gatsby-source-filesystem`);
 
 exports.onCreateNode = function onCreateNode({
   actions: { createNodeField },
@@ -10,15 +10,15 @@ exports.onCreateNode = function onCreateNode({
     const slug = createFilePath({
       node,
       getNode,
-    })
+    });
 
     createNodeField({
       node,
       name: `slug`,
       value: slug,
-    })
+    });
   }
-}
+};
 
 exports.createPages = async function createPages({
   actions: { createPage },
@@ -26,7 +26,7 @@ exports.createPages = async function createPages({
 }) {
   const result = await graphql(`
     {
-      labs: allMdx(filter: { fileAbsolutePath: { regex: "/labs/" } }) {
+      labs: allMdx {
         edges {
           node {
             fields {
@@ -38,24 +38,26 @@ exports.createPages = async function createPages({
     }
   `).then(res => {
     if (res.errors) {
-      throw res.errors
+      throw res.errors;
     }
-    return res.data
-  })
+    return res.data;
+  });
 
-  const labTemplate = require.resolve(`./src/templates/lab.js`)
+  const labTemplate = require.resolve(`./src/templates/lab.js`);
 
-  result.labs.edges.forEach(({ node }) => {
-    const { slug } = node.fields
-    createPage({
-      component: labTemplate,
-      path: slug,
-      context: {
-        slug: slug,
-      },
-    })
-  })
-}
+  result.labs.edges
+    .filter(({ node }) => node.fields.slug !== `/`)
+    .forEach(({ node }) => {
+      const { slug } = node.fields;
+      createPage({
+        component: labTemplate,
+        path: slug,
+        context: {
+          slug: slug,
+        },
+      });
+    });
+};
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -63,5 +65,5 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
       alias: { src: path.resolve(__dirname, 'src') },
     },
-  })
-}
+  });
+};

@@ -14,6 +14,7 @@ function Layout({ children, location }) {
             edges {
               node {
                 title
+                link
                 items {
                   title
                   link

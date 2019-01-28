@@ -32,7 +32,22 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-transformer-yaml`,
-    `gatsby-mdx`,
+    {
+      resolve: `gatsby-mdx`,
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 590,
+            },
+          },
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+          },
+        ],
+      },
+    },
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,

@@ -1,0 +1,70 @@
+---
+title: Set Up
+---
+
+We're so happy to have you here learning all about Gatsby, and in particular, with integrating Gatsby with Drupal as a headless CMS.
+
+The central purpose of this first lab is to give everyone sufficient time to validate machine setup and get a local version of Gatsby and a headless Drupal instance created and running.
+
+If you haven't already, *start* with the [Set Up and Validation instructions here](/set-up/).
+
+Once your environment has been validated, we can get up and running!
+
+## Setting up Drupal
+
+<!-- TODO: Jesus -->
+
+## Installing Dependencies
+
+The first step when getting started with any Node.js/npm based project is to run `yarn` (or `npm install`, but we recommend `yarn` for these labs) in the root of the project. This will install any necessary dependencies and link any binaries needed for local development.
+
+To install dependencies, run:
+
+```shell
+yarn
+```
+
+If there are any errors, inspect the console to see if they can be safely ignored. A `warning` (like peer dependencies) can be ignored, but if the install step fails please alert one of the instructors.
+
+## Running locally
+
+Now that Drupal has been set-up _and_ our dependencies have been installed, we can get to work on Lab 1!
+
+First, change into the lab01 directory, like so:
+
+```shell
+cd labs/01-getting-started/
+```
+
+### Setting up environment variables
+
+We use environment variables to encapsulate _secrets_ (values that we want exposed to our build process, but that we don't want prying 👀 to be able to access). We use a tool `dotenv` to provide these to our build process.
+
+```shell
+cat .env.sample > .env.development
+```
+
+This will take the contents of `.env.sample` and pipe them to `.env.development`. If you open up this file in your editor, you will see the hard-coded environment variables, and what needs to be changed!
+
+Open up this file and replace the environment variables with the values you obtained when setting up the Drupal instance.
+
+<details>
+  <summary>
+    Sample .env.development file
+  </summary>
+
+  ```shell
+  DRUPAL_USERNAME=your-usernmae
+  DRUPAL_PASSWORD=hunter2
+  ```
+</details>
+
+Almost ready! Now if you run
+
+```shell
+yarn start
+```
+
+you should be greeted with the following welcome screen. You have completed Lab One!
+
+<!-- TODO: Insert Lab One Image -->
