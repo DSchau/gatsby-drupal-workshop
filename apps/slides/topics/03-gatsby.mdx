@@ -1,0 +1,120 @@
+import { FullScreenCode, Main, Section, SectionInverted } from 'gatsby-mdx-theme'
+import { LiveCode } from 'mdx-deck-live-code'
+
+export default SectionInverted
+
+## Gatsby
+### A modern app compiler for React
+
+---
+
+## What's an app compiler?
+
+### Internalizes best practices and makes them available for free, merely by using!
+
+---
+
+## What's static code generation?
+
+### JSX _eventually_ produces HTML. Gatsby short-circuits this for performance!
+
+---
+
+### HTML, the way we used to write it!
+
+---
+
+export default FullScreenCode
+
+```jsx
+<div id="___gatsby">
+  <header><h1>Hello World</h1></header>
+  <main><p>This is some content</p></main>
+</div>
+```
+
+---
+
+## Your app will load without Javascript... 🔥 (quickly!)
+
+---
+
+## Extremely modular architecture
+
+### Plugins to do _anything!_
+
+---
+
+- `gatsby-plugin-react-helmet` (SEO)
+- `gatsby-source-filesystem` (query your local file system)
+- `gatsby-plugin-offline` (offline Progressive Web App)
+- [and a _lot_ more!](https://www.gatsbyjs.org/plugins/)
+
+---
+
+## Bring your own data layer
+
+### A core idea of Gatsby is that it's data agnostic
+
+---
+
+## Source(s)
+
+- Local Markdown files
+- Remote GraphQL API
+- Wordpress (😱)
+- and... Drupal!
+
+---
+
+## GraphQL
+
+- Plugins extend an internal GraphQL schema
+- This schema is queried and injected at _build time_ rather than run time
+
+---
+
+## GraphiQL
+
+<div>
+  <iframe src="https://711808k40x.sse.codesandbox.io/___graphql?query=%7B%0A%20%20site%20%7B%0A%20%20%20%20siteMetadata%20%7B%0A%20%20%20%20%20%20title%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A" style={{ height: '80vh', width: '80vw' }} />
+</div>
+
+---
+
+## A React component injected with GraphQL
+
+---
+
+export default FullScreenCode
+
+```jsx
+import React from 'react'
+import { graphql } from 'gatsby'
+
+export default function IndexPage({ data }) {
+  return <h1>{data.site.siteMetadata.title}</h1>
+}
+
+export const indexQuery = graphql`
+  {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`
+```
+
+---
+
+- The shape _matches_ the data
+- The query is compiled away (no run time cost!)
+- Static HTML is produced (🎉)
+
+---
+
+## Gatsby is... amazing.
+
+### Can't wait to dive in further in subsequent labs

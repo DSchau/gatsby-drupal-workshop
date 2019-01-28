@@ -1,0 +1,139 @@
+import { FullScreenCode, Main, Section, SectionInverted } from 'gatsby-mdx-theme'
+import { LiveCode } from 'mdx-deck-live-code'
+
+export default SectionInverted
+
+## React + Gatsby = ❤️
+
+---
+
+## React
+
+---
+
+### UI library that is eating the world
+
+---
+
+export default FullScreenCode
+
+```jsx
+import React from 'react'
+
+export default function HelloWorld() {
+  return <h1>Hello World</h1>
+}
+```
+
+---
+
+export default FullScreenCode
+
+```jsx
+import React from 'react'
+
+// transpiles to:
+export default function HelloWorld() {
+  return React.createElement(`h1`, {}, `Hello World`)
+}
+```
+
+---
+
+## Central ideas
+
+- JSX
+- Component model (functional or class)
+- Reusability and easy encapsulation
+- Pass data via `props`
+
+---
+
+export default FullScreenCode
+
+```jsx
+import React from 'react'
+
+export default function Header() {
+  return (
+    <header>
+      <h1>Hello Wordl</h1>
+    </header>
+  )
+}
+```
+
+---
+
+export default FullScreenCode
+
+```jsx
+import React from 'react'
+
+import Header from './header'
+
+export default function Layout({ children }) {
+  return (
+    <div>
+      <Header />
+      <main>{children}</main>
+    </div>
+  )
+}
+```
+
+---
+
+export default FullScreenCode
+
+```jsx
+import React from 'react'
+
+import Layout from './layout'
+
+export default function App() {
+  return (
+    <Layout>
+      <p>Hello world! This is some content!</p>
+    </Layout>
+  )
+}
+```
+
+---
+
+## What will this render?
+
+---
+
+<LiveCode
+  title="App.js"
+  size="small"
+  code={`
+  () => (
+  <div>
+    <header>
+      <h1>Hello World</h1>
+    </header>
+    <main>
+      <p>Hello world! This is some content!</p>
+    </main>
+  </div>
+)
+  `.trim()}
+/>
+
+---
+
+## This isn't _really_ a React Workshop
+
+### Gatsby uses React, and abstracts some concepts.
+
+---
+
+## Tips and Resources
+
+- Learn the basics of React before learning more advanced concepts like Redux and state management
+- [ReactJS.org](https://reactjs.org)
+- Specifically, [the tutorial](https://reactjs.org/tutorial/tutorial.html) is great!
+- [Gatsby is a *great* playground to learn React](https://www.gatsbyjs.org/blog/2018-12-19-gatsby-scales-with-expertise-and-scope/)
