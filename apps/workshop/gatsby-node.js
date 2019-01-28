@@ -62,11 +62,7 @@ exports.createPages = async function createPages({
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
-      modules: [
-        path.resolve(__dirname, 'src'),
-        'node_modules',
-        path.join(__dirname, `..`, `..`, `node_modules`), // yarn workspace!
-      ],
+      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
       alias: { src: path.resolve(__dirname, 'src') },
     },
   });

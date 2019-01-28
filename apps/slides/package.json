@@ -9,12 +9,16 @@
     "build": "mdx-deck build deck.js --webpack webpack.config.js --no-html",
     "postbuild": "npm run build:pdf && cp -r dist/. ../workshop/public/slides",
     "build:pdf": "mdx-deck pdf deck.js",
+    "preoptimize": "mkdir -p dist/assets",
+    "optimize": "if-env NETLIFY=true && find assets -type f -exec ./node_modules/.bin/sharp -i '{}' -o dist/'{}' --quality 70 \\; || echo \"Not CI\"",
     "start": "mdx-deck deck.js --webpack webpack.config.js"
   },
   "devDependencies": {
     "css-loader": "^1.0.0",
     "file-loader": "^2.0.0",
+    "if-env": "^1.0.4",
     "mdx-deck": "^1.7.4",
+    "sharp-cli": "^1.9.0",
     "style-loader": "^0.23.0"
   },
   "dependencies": {
