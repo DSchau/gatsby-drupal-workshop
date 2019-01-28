@@ -11,7 +11,7 @@
     "build:pdf": "mdx-deck pdf deck.js",
     "preoptimize": "mkdir -p dist/assets",
     "optimize": "if-env NETLIFY=true && find assets -type f -exec ./node_modules/.bin/sharp -i '{}' -o dist/'{}' --quality 70 \\; || echo \"Not CI\"",
-    "start": "WORKSHOP_DATE=\"January 1, 2019\" mdx-deck deck.js --webpack webpack.config.js"
+    "start": "mdx-deck deck.js --webpack webpack.config.js"
   },
   "devDependencies": {
     "css-loader": "^1.0.0",
@@ -24,7 +24,6 @@
   "dependencies": {
     "gatsby-mdx-theme": "^0.0.6",
     "mdx-deck-live-code": "^1.0.0",
-    "rebass": "^3.0.1",
     "typeface-space-mono": "^0.0.54",
     "typeface-spectral": "^0.0.54"
   }

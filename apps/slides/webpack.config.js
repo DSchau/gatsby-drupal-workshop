@@ -7,10 +7,11 @@ module.exports = {
         const mergedKey = `process.env.${key}`;
         let value = process.env[key];
         if (value === 'true' || value === 'false') {
-          merged[mergedKey] = JSON.parse(value);
+          value = JSON.parse(value);
         } else {
-          merged[mergedKey] = JSON.stringify(process.env[key]);
+          value = JSON.stringify(value);
         }
+        merged[mergedKey] = value;
         return merged;
       }, {})
     ),
