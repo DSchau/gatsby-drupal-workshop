@@ -63,7 +63,7 @@ export const Navigation = () => (
           </Link>
         </li>
         <li>
-          <ExternalLink href="./slides" title="View the slidedeck">
+          <ExternalLink href="/slides" title="View the slidedeck">
             <MdSlideshow css={{ fontSize: 28 }} />
           </ExternalLink>
         </li>
