@@ -25,6 +25,7 @@
     "prettier": "^1.16.1"
   },
   "scripts": {
+    "prebuild": "lerna run build --scope=@dschau/sidebar",
     "build": "lerna run build --scope=@dschau/gatsby-app-*",
     "watch": "lerna run watch --scope=@dschau/sidebar",
     "publish": "lerna publish"
