@@ -65,7 +65,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       modules: [
         path.resolve(__dirname, 'src'),
         'node_modules',
-        path.resolve(__dirname, `node_modules`),
+        path.join(__dirname, `..`, `..`, `node_modules`), // yarn workspace!
       ],
       alias: { src: path.resolve(__dirname, 'src') },
     },
