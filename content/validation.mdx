@@ -1,10 +1,10 @@
 ---
-title: Set Up
+title: Environment Validation and Set Up
 ---
 
 We are going to primarily be working in a [Github repo](https://github.com/dschau/gatsby-drupal-blog).
 
-Prior to the workshop, we **highly** recommend running the validation step to ensure your machine will be best equipped to get up and running with Gatsby and Drupal.
+Prior to the workshop, we **highly** recommend running the validation step(s) below to ensure your machine will be best equipped to get up and running with Gatsby and Drupal.
 
 ## Requirements
 
@@ -13,6 +13,7 @@ Prior to the workshop, we **highly** recommend running the validation step to en
     - `git`
     - `npm` (>= 5.0.0)
     - `yarn` (>= 1.0.0)
+        - See [Why Yarn?](#why-yarn)
 
 ## Instructions
 
@@ -39,3 +40,9 @@ We include a helpful validation script, and we are going to use the forking/upst
     - You should see the following
     ![Success](./images/success.png)
 1. Come prepared to learn 🎉 You're ready for the labs and workshop!
+
+## Why Yarn
+
+Yarn has an excellent feature called [Yarn Workspaces](https://yarnpkg.com/lang/en/docs/workspaces/), which let us bootstrap a project with multiple folders easily and quickly. In fact, each lab is a standalone folder and project that contains its own unique dependencies and project structure. With NPM, we would have to run `npm install` in _each_ folder and Yarn Workspaces allows us to run this install step a _single_ time and have all dependencies available for each and every lab with that one command.
+
+It is not strictly necessary, but do allot a few more minutes for each lab to install dependencies if you do not want to use Yarn.

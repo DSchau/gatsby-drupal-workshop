@@ -6,6 +6,7 @@ import { MdError, MdInfo, MdWarning } from 'react-icons/md';
 
 const Container = styled.div`
   display: flex;
+  align-items: center;
   margin: 1rem auto;
 
   ${props => {
@@ -26,6 +27,7 @@ const IconBase = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 
   padding: 1rem;
 `;
