@@ -16,17 +16,40 @@ Once your environment has been validated, we can get up and running!
 
 <!-- TODO: Jesus -->
 
-## Installing Dependencies
+For this training, we will be proving a Drupal instance already pre-configured for each one of the attendees.
 
-The first step when getting started with any Node.js/npm based project is to run `yarn` (or `npm install`, but we recommend `yarn` for these labs) in the root of the project. This will install any necessary dependencies and link any binaries needed for local development.
+This Drupal instance will be running on Digital Ocean, so you do not have to worry about getting a Drupal site setup locally.
 
-To install dependencies, run:
+If you want to replicate the same Drupal installation running locally you should have the following dependencies loaded in your system.
+
+## Drupal dependencies
+* [git](https://git-scm.com/)
+* [docker](https://www.docker.com/)
+* [ahoy (ver 2)](https://github.com/ahoy-cli/ahoy)
+
+## Drupal setup
 
 ```shell
-yarn
+# Clone repository
+git clone git@github.com:weknowinc/drupal-boina.git
+
+# Copy .env file
+cp .env.dist .env
+
+# Add hostname entry in your /etc/hosts file
+127.0.0.1    drupal-boina.develop
+
+# Start containers
+ahoy up
+
+# Install Composer dependencies
+ahoy composer install
+
+# Install Boina distribution
+ahoy drupal boina:install
 ```
 
-If there are any errors, inspect the console to see if they can be safely ignored. A `warning` (like peer dependencies) can be ignored, but if the install step fails please alert one of the instructors.
+<Alert type="warn">Note: Getting a local Drupal instance is not required for this training. But we provided you this machine for you to try at home.</Alert>
 
 ## Running locally
 
