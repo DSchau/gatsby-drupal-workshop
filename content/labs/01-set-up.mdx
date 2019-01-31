@@ -55,7 +55,16 @@ ahoy drupal boina:install
 
 Now that Drupal has been set-up _and_ our dependencies have been installed, we can get to work on Lab 1!
 
-First, change into the lab01 directory, like so:
+First, just to validate that content hasn't changed upstream (e.g. in the parent repo), we can sync with upstream.
+
+<Alert type="info">If you haven't set up upstream, run: <code>git remote add upstream https://github.com/dschau/gatsby-drupal-blog</code></Alert>
+
+```shell
+git fetch upstream master
+git reset --hard upstream/master
+```
+
+Next, change into the lab01 directory, like so:
 
 ```shell
 cd labs/01-getting-started/
@@ -95,6 +104,8 @@ yarn start
 ```
 
 you should be greeted with the following welcome screen. You have completed Lab One!
+
+<!-- TODO: have them set up a component and import it -->
 
 <!-- TODO: Insert Lab One Image -->
 

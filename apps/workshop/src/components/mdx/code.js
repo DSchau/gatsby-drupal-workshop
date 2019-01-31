@@ -5,12 +5,13 @@ import codeTheme from 'prism-react-renderer/themes/vsDarkPlus';
 
 const Title = styled.div`
   margin: 0;
-  background-color: ${codeTheme.plain.backgroundColor};
+  background-color: #4a4a4a;
+  border-bottom: 1px solid #000;
   color: ${codeTheme.plain.color};
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   font-size: 18px;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   margin-top: 1.5rem;
 `;
 
