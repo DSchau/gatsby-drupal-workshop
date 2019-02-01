@@ -1,6 +1,9 @@
 import { Image } from 'mdx-deck'
 import { FullScreenCode, Main, Section, SectionInverted } from 'gatsby-mdx-theme'
 
+import { FullScreenImage} from '../layouts'
+import { Link } from '../components'
+
 export default SectionInverted
 
 # `gatsby-node.js`
@@ -35,3 +38,172 @@ exports.createPages = async function createPages({ actions, graphql }) {
   // snip
 }
 ```
+
+---
+
+## What are `actions`?
+
+### An object of utilities to access Gatsby internals
+
+---
+
+```js
+const { createPage, createNodeField, createRedirect, ... } = actions
+```
+
+[and lots more!](https://www.gatsbyjs.org/docs/actions/#actions)
+
+---
+
+## Let's actually _create_ a page
+
+---
+
+## Three pieces
+
+- A path to a React.js component
+- A path/route to create
+- Any necessary "context" (data) to pass to the page
+
+---
+
+## A path to a React.js component
+
+---
+
+export default FullScreenCode
+
+```jsx
+import React from 'react'
+
+export default function Template() {
+  return <h1>This is a template!</h1>
+}
+```
+
+---
+
+export default FullScreenCode
+
+```jsx
+const path = require('path')
+exports.createPages = async function createPages({ actions }) {
+  const template = path.resolve('src/templates/template.js')
+  createPage({
+    component: template,
+    path: `/hello-world`,
+    context: {
+      hello: true,
+      world: true
+    }
+  })
+}
+```
+
+---
+
+## Creating pages from GraphQL data
+
+---
+
+## Remember that the GraphQL schema is _extended_ by plugins
+
+### This means we have things like Drupal content in our GraphQL schema
+
+---
+
+export default FullScreenCode
+
+```jsx
+const result = await graphql(`
+  {
+    allNodeArticle {
+      edges {
+        node {
+          title
+        }
+      }
+    }
+  }
+`)
+  .then(res => res.data)
+```
+
+---
+
+## Now we can create pages from this dynamic data sourced from _wherever_
+
+---
+
+## How do we fetch data from a component?
+
+### We use... `graphql` of course!
+
+---
+
+## The `graphql` helper
+
+### This is used in a page or template component
+
+```jsx
+import { graphql } from 'gatsby'
+```
+
+---
+
+export default FullScreenCode
+
+```jsx
+import React from 'react'
+import { graphql } from 'gatsby'
+
+export default function Template() {
+  return <h1>This is a template!</h1>
+}
+
+// let's add this here
+```
+
+---
+
+export default FullScreenCode
+
+```jsx
+export const templateQuery = graphql`
+  query TemplateQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`
+```
+
+---
+
+## The React.js component will receive the data as a prop
+
+### 🤯
+
+---
+
+export default FullScreenCode
+
+```jsx
+export default function Template({ data }) {
+  return <h1>Hello from {data.site.siteMetadata.title}</h1>
+}
+
+// the query
+```
+
+---
+
+export default FullScreenImage({ darken: 0.5, src: `https://media.giphy.com/media/ZY5MCSF22yYkE/giphy.gif` })
+
+## Lab 02
+
+### Sourcing Data from Drupal
+
+<Link href="/labs/02-querying-drupal//">Take me to the Lab</Link>
