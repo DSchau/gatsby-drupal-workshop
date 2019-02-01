@@ -48,7 +48,16 @@ The name can be whatever you want, e.g. `Sync with Drupal` and you will want to 
 
 ### Adding the webhook to Drupal
 
-<!-- TODO: Jesus -->
+We can now add a build hook that triggers a Netlify re-build. Using the toolbar:
+
+1. Configuration -> System -> Build hook settings
+1. In the `Build hook` text field, enter your saved build hook from Netlify
+1. Be sure to add the appropriate triggers, e.g. Node updates
+1. Press "Save configuration"
+
+It should look something like this:
+
+![Drupal Web Hook](../images/web-hook.png)
 
 We have _one more thing_ to get set-up, and then the workshop is finished! The `og:image` property requires a path containing the _full_ URL, not just a path to an image. For instance, `<meta property="og:image" content="/path/to/image.jpg>` is invalid, but `<meta property="og:image" content="https://your-web-site.com/path/to/image.jpg>` is valid! Let's fix this to maximize our SEO and get that nice social sharing support, as well!
 
