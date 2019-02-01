@@ -254,7 +254,7 @@ export default function IndexPage({ data }) {
     <Layout>
       <SEO title="Your Great Blog" description="All my blog posts" />
       <ul>
-        {data.articles.edges.map(({ node }) => (
+        {data.allNodeArticle.edges.map(({ node }) => (
           <li key={node.title}>{node.title}</li>
         ))}
       </ul>
