@@ -19,7 +19,7 @@ export default {
             : ``;
         }
       }
-      // I have NO idea why this is required
+      // https://github.com/ChristopherBiscardi/gatsby-mdx/issues/212
       const children = mdxTagProps.children
         .replace(/^default function/gm, 'export default function')
         .replace(/^const (\w+Query)/gm, 'export const $1');
