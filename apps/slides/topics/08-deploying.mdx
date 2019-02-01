@@ -1,0 +1,136 @@
+import { Image } from 'mdx-deck';
+import {
+  FullScreenCode,
+  Main,
+  Section,
+  SectionInverted,
+} from 'gatsby-mdx-theme';
+
+import { FullScreenImage } from '../layouts';
+import { Link, TweetEmbed } from '../components';
+
+export default SectionInverted;
+
+# Deploying
+
+---
+
+## Gatsby produces static content
+
+---
+
+## Static content?
+
+- HTML
+- CSS
+- JavaScript
+- images
+- etc.
+
+---
+
+## Static content is _easy_ to host
+
+---
+
+## Hosting servers is... less easy.
+
+---
+
+## 👋 Goodbye
+
+- Scaling issues
+- Provisioning servers
+- 📈 Costs
+- Pain
+
+---
+
+<TweetEmbed tweetId="1090659696233463808" fontSize={20} />
+
+---
+
+## Host your content... wherever
+
+### Deploy on CloudFront or the server in your basement
+
+---
+
+## The Static Model necessitates a _shift_
+
+---
+
+## Re-builds are cheap
+
+---
+
+## Re-build whenever content changes
+
+### Web-hooks, cron jobs, etc.
+
+---
+
+## But what about dynamic content?
+
+### Comments, real-time data, client-only routes
+
+---
+
+## All possible
+
+### Gatsby is not static; it produces a dynamic React application
+
+---
+
+export default FullScreenCode;
+
+```jsx
+import React, { Component } from 'react';
+
+export default class DynamicData extends Component {
+  componentDidMount() {
+    // invoked by the browser
+    // fetch data, comments, etc.
+  }
+}
+```
+
+---
+
+<img src="assets/gatsby-mail.png" style={{ height: '70vh' }} />
+
+Just for fun. Not a real product!
+
+---
+
+![Gatsby Mail Hydrated](assets/gatsby-mail-loaded.png)
+
+---
+
+## OK OK you're sold
+
+### 🤞
+
+---
+
+export default FullScreenImage({
+  darken: 0.5,
+  src: `https://media.giphy.com/media/l0MYSryDg63YEmXVS/giphy.gif`,
+});
+
+# Time to
+
+## SHIP
+
+---
+
+export default FullScreenImage({
+  darken: 0.5,
+  src: `https://media.giphy.com/media/xDXvXqzEmjihi/giphy.gif`,
+});
+
+## Lab 05
+
+### Deploying
+
+<Link href="/labs/05-deploying/">Take me to the Lab</Link>
