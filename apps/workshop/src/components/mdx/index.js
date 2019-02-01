@@ -19,6 +19,10 @@ export default {
             : ``;
         }
       }
+      // I have NO idea why this is required
+      const children = mdxTagProps.children
+        .replace(/^default function/gm, 'export default function')
+        .replace(/^const (\w+Query)/gm, 'export const $1');
       return (
         <Code
           is="block"
@@ -26,6 +30,7 @@ export default {
           {...mdxTagProps.props}
           lang={lang}
           title={title}
+          children={children}
         />
       );
     } else {
