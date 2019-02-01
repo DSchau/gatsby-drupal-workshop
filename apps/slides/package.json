@@ -17,7 +17,7 @@
     "css-loader": "^1.0.0",
     "file-loader": "^2.0.0",
     "if-env": "^1.0.4",
-    "mdx-deck": "^1.7.4",
+    "mdx-deck": "^1.8.2",
     "sharp-cli": "^1.9.0",
     "style-loader": "^0.23.0"
   },
