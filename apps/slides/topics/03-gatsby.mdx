@@ -200,6 +200,53 @@ export default FullScreenCode;
 
 ---
 
+## Note
+
+### Gatsby is non-opinionated about style/css
+
+### We support CSS Modules, CSS in JS, plain CSS, etc.
+
+---
+
+## The labs don't require style, but if you want to...
+
+### Try [CSS Modules](https://www.gatsbyjs.org/docs/css-modules/)
+
+---
+
+export default FullScreenCode;
+
+```css
+.item {
+  color: blue;
+}
+
+.other {
+  color: red;
+}
+```
+
+---
+
+export default FullScreenCode;
+
+```jsx
+import React from 'react';
+
+import styles from './whatever.module.css';
+
+export default function Hello() {
+  return (
+    <div>
+      <h1 className={styles.item}>I am blue</h1>
+      <h1 className={styles.other}>I am red</h1>
+    </div>
+  );
+}
+```
+
+---
+
 export default FullScreenImage({
   darken: 0.5,
   src: `https://media.giphy.com/media/11LKx7277LkE0M/giphy.gif`,

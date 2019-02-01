@@ -136,7 +136,136 @@ export default function App() {
 
 ---
 
+## React 101
+
+---
+
+## Component model
+
+---
+
+### A component takes data (props) and returns JSX
+
+### JSX is an HTML-like (really XML) language
+
+---
+
+One of:
+
+- `function`
+- `class`
+
+---
+
+### We use `function` in all the labs
+
+### Class has lifecycle methods
+
+---
+
+### Hooks (upcoming feature!) minimizes need for classes
+
+---
+
+## `props`
+
+### Attributes, bindings, etc.
+
+---
+
+## How we pass data
+
+---
+
+## `string` prop
+
+```jsx
+<SomeComponent value="hello-world" />
+```
+
+---
+
+## `boolean` prop
+
+```jsx
+<SomeComponent condition={true} />
+<SomeComponent condition={false} />
+```
+
+---
+
+## `object` prop
+
+```jsx
+function SomeComponent() {
+  const data = { foo: true, bar: 'baz' };
+  return <OtherComponent data={data} />;
+}
+```
+
+---
+
+## `function` prop
+
+### Not _just_ for event handlers
+
+```jsx
+<input onChange={ev => alert(ev.target.value)} />
+```
+
+---
+
+## Using Props
+
+---
+
+export default FullScreenCode;
+
+```jsx
+function Hello(props) {
+  return <h1>Hello {props.name}</h1>;
+}
+
+<Hello name="DrupalCamp" />;
+```
+
+---
+
+## Expression bindings
+
+### Those _weird_ curly braces
+
+---
+
+## One of
+
+- `string`
+- `React` component
+- `false`
+- `null`
+- `Array` (of these)
+
+---
+
+## Boolean logic = a-ok
+
+```jsx
+function Hello({ name }) {
+  return <h1>Hello {name ? name : 'John Doe'}</h1>;
+}
+```
+
+---
+
+### React re-renders component(s) when props change
+
+### Diffs the result, and computes minimum number of changes to get to new state
+
+---
+
 ## This isn't _really_ a React Workshop
+
+## There's _lots_ more to React
 
 ### Gatsby uses React, and abstracts some concepts.
 
