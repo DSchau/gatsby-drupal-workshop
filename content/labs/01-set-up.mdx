@@ -16,42 +16,45 @@ Once your environment has been validated, we can get up and running!
 
 <!-- TODO: Jesus -->
 
-For this training, we will be proving a Drupal instance already pre-configured for each one of the attendees.
+<Alert type="info">For this training, we will be proving a Drupal instance already pre-configured for each one of the attendees.</Alert>
 
 This Drupal instance will be running on Digital Ocean, so you do not have to worry about getting a Drupal site setup locally.
 
-If you want to replicate the same Drupal installation running locally you should have the following dependencies loaded in your system.
+**If** you want to replicate the same Drupal installation running locally you can follow the following instructions:
 
-## Drupal dependencies
-* [git](https://git-scm.com/)
-* [docker](https://www.docker.com/)
-* [ahoy (ver 2)](https://github.com/ahoy-cli/ahoy)
+<details>
+  <summary>Local Drupal Set-up Instructions</summary>
 
-## Drupal setup
+  ## Drupal dependencies
+  * [git](https://git-scm.com/)
+  * [docker](https://www.docker.com/)
+  * [ahoy (ver 2)](https://github.com/ahoy-cli/ahoy)
 
-```shell
-# Clone repository
-git clone git@github.com:weknowinc/drupal-boina.git
+  ## Drupal setup
 
-# Copy .env file
-cp .env.dist .env
+  ```shell
+  # Clone repository
+  git clone git@github.com:weknowinc/drupal-boina.git
 
-# Add hostname entry in your /etc/hosts file
-127.0.0.1    drupal-boina.develop
+  # Copy .env file
+  cp .env.dist .env
 
-# Start containers
-ahoy up
+  # Add hostname entry in your /etc/hosts file
+  127.0.0.1    drupal-boina.develop
 
-# Install Composer dependencies
-ahoy composer install
+  # Start containers
+  ahoy up
 
-# Install Boina distribution
-ahoy drupal boina:install
-```
+  # Install Composer dependencies
+  ahoy composer install
 
-<Alert type="warn">Note: Getting a local Drupal instance is not required for this training. But we provided you this machine for you to try at home.</Alert>
+  # Install Boina distribution
+  ahoy drupal boina:install
+  ```
 
-## Running locally
+</details>
+
+## Running Node.js and development server locally
 
 Now that Drupal has been set-up _and_ our dependencies have been installed, we can get to work on Lab 1!
 
@@ -94,7 +97,7 @@ Open up this file and replace the environment variables with the values you obta
 </details>
 
 <Alert type="info">
-  Note: you can check out `gatsby-config.js` for further info to see how these environment variables are used.
+  Note: you can check out <code>gatsby-config.js</code> for further info to see how these environment variables are used.
 </Alert>
 
 Almost ready! Now if you run
@@ -103,10 +106,43 @@ Almost ready! Now if you run
 yarn start
 ```
 
-you should be greeted with the following welcome screen. You have completed Lab One!
+you should be greeted with the following welcome screen.
 
-<!-- TODO: have them set up a component and import it -->
+Let's just make a simple change so you can get a little more familiar with the development server, file structure, and React! We want to take the `footer` content that is currently in `src/components/layout.js` and move it to its own component at `src/components/footer.js`.
 
-<!-- TODO: Insert Lab One Image -->
+### Creating the `Footer` component
+
+First - create the necessary component with:
+
+```shell
+touch src/components/footer.js
+```
+
+<Alert type="info">If on a non-Unix OS, just create the file with your IDE or Explorer!</Alert>
+
+Next, we want to take the `footer` structure that is in layout, and encapsulate in the `Footer` component we created. Here's an empty structure you can use:
+
+```jsx
+import React from 'react'
+
+export default function Footer() {
+  // TODO: replace with footer JSX
+  return (
+    null
+  )
+}
+```
+
+Finally, import the newly created `Footer` component in `src/components/layout.js` and replace the existing `footer` content that _was_ there.
+
+The end result should look _exactly_ as it did previously, just with a little nicer encapsulation now. You're now thinking in components 🎉 Feel free to edit any of the code in `footer.js`, e.g. perhaps add your name!
+
+## Wrap Up
+
+Note that for **every** subsequent lab, the start steps will be the same. You will want to do the following for _each_ lab:
+
+- Copy over existing `.env` files from previous lab(s)--note these will not change, so feel free to just copy them!
+- `cd` to the current lab, e.g. `cd labs/01-set-up/`
+- Run `yarn start` to boot-up the local development server 
 
 <Alert type="warn">Note: remember to exit out of the process (Ctrl + C) to close the local development server.</Alert>

@@ -1,0 +1,3 @@
+- Fix sidebar
+- Add screenshots / info for all the Drupal stuff
+  - Note: weirdly, I was not able to upload a custom image

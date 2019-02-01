@@ -10,7 +10,7 @@ const Title = styled.div`
   color: ${codeTheme.plain.color};
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  font-size: 18px;
+  font-size: 14px;
   padding: 0.5rem 1rem;
   margin-top: 1.5rem;
 `;

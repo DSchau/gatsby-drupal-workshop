@@ -174,10 +174,13 @@ From this point, we want to query for all of our blog posts, so that we can disp
 
   ```graphql
   query GetAllBlogPosts {
-    allDrupalBlogPost {
+    allNodeArticle {
       edges {
         node {
           title
+          fields {
+            slug
+          }
         }
       }
     }
@@ -239,9 +242,9 @@ export const indexQuery = graphql`
         <SEO title="Your Great Blog" description="All my blog posts" />
         <ul>
           {
-            data.allDrupalBlogPost.edges.map(({ node }) => (
-              <li key={node.frontmatter.title}>
-                {node.frontmatter.title}
+            data.articles.edges.map(({ node }) => (
+              <li key={node.title}>
+                {node.title}
               </li>
             ))
           }
@@ -252,7 +255,7 @@ export const indexQuery = graphql`
 
   export const indexQuery = graphql`
     query GetAllBlogPosts {
-      allDrupalBlogPost {
+      allNodeArticle {
         edges {
           node {
             title
@@ -264,9 +267,9 @@ export const indexQuery = graphql`
   ```
 </details>
 
-Woo hoo! If you see some posts like below, you know that you are officially done with Part One!
+Woo hoo! If you see some posts like below you know that you are officially done with Part One of this lab!
 
-<!-- TODO: Add Part One Screenshot -->
+![Part One Finished](../images/posts-not-linked.png)
 
 ## Part Two: The Big Leagues
 
@@ -278,14 +281,14 @@ First, we need to create our templates directory and our blog post template Reac
 
 ```shell
 mkdir -p src/templates
-touch src/templates/blog-post.js
+touch src/templates/article.js
 ```
 
 On a non-Unix based filesystem, feel free to just create/edit this file and folder structure with your code editor or manually with the Explorer.
 
-Once created, we'll want to give life to this component. Paste the following content into your version of `src/templates/blog-post.js`:
+Once created, we'll want to give life to this component. Paste the following content into your version of `src/templates/article.js`:
 
-```jsx:title=src/templates/blog-post.js
+```jsx:title=src/templates/article.js
 import React from 'react'
 
 import Layout from '../components/layout'
@@ -312,7 +315,7 @@ We will want to do several things in this file, particularly with the `createPag
 - Query for all blog posts (we can re-use something here)
 - Use this data to create a page based on a route and our blog post template
 
-```js
+```js:title=gatsby-node.js
 const path = require('path')
 
 exports.createPages = async function createPages({ actions, graphql }) {
@@ -339,12 +342,12 @@ exports.createPages = async function createPages({ actions, graphql }) {
 consider the following snippet for the `createPage` action:
 
 ```js
-const blogPostTemplate = path.resolve('src/templates/blog-post.js')
+const articleTemplate = path.resolve('src/templates/article.js')
 
 const slug = `/blog/1234`
 
 createPage({
-  component: blogPostTemplate,
+  component: articleTemplate,
   path: slug,
   context: {
     slug
@@ -373,14 +376,14 @@ createPage({
         return res.data
       })
 
-    const blogPostTemplate = path.resolve('src/templates/blog-post.js')
+    const blogPostTemplate = path.resolve('src/templates/article.js')
 
-    result.allDrupalBlogPost.edges.forEach(({ node }) => {
+    result.allNodeArticle.edges.forEach(({ node }) => {
       createPage({
         component: blogPostTemplate,
         path: node.fields.slug,
         context: {
-          slug
+          slug: node.fields.slug
         }
       })
     })
@@ -398,8 +401,12 @@ We want to be able to route to these posts, so we'll want to edit this page with
 - We want to query for a slug, just like we've done in `gatsby-node.js`
 - We want to use the `Link` component from `gatsby` to link to a post
     - The `Link` component takes a `to` prop, e.g. `<Link to="/about">About</About>` will link to `/about`.
+    - The `Link` component is imported like so:
+        ```jsx
+        import { Link } from 'gatsby'
+        ```
 
-You will be successful if you can (still!) display your posts, but now clicking one of the posts will link to one of your posts! If you can link to a post, you can move on to the next step! At this point, we want to augment our BlogPost template so that we can actually _display_ a post in more detail!
+You will be successful if you can (still!) display your listing of all posts, but _now_ clicking one of the posts will link to one of your posts! If you can link to a post, you can move on to the next step! At this point, we want to augment our BlogPost template so that we can actually _display_ a post in more detail!
 
 ### Updating the BlogPost template
 
@@ -407,18 +414,18 @@ Similarly to page components, template components can _also_ invoke GraphQL quer
 
 ```graphql
 export const blogPostQuery = graphql`
-  query GetBlogPostBySlug($slug: String) {
+  query GetArticleBySlug($slug: String) {
     # use this $slug somehow :)
   }
 `
 ```
 
-We will want to use this `$slug` variable, and query for a blog post by its slug. A convention in GraphQL is that if _all_ resources are available as `allResource` then `resource` is the resolver we can use to query a single resource, for example:
+We will want to use this `$slug` variable, and query for a blog post by its slug. A convention in GraphQL is that if _all_ resources are available as `allResource` then `resource` is the resolver we can use to query a single resource. In other words, if our collection of resources is `allNodeArticle` the _single resource_ will be called `nodeArticle`. Consider an example:
 
 ```graphql
 export const blogPostQuery = graphql`
-  query GetBlogPostBySlug($slug: String) {
-    someResource({ slug: { eq: $slug }}) {
+  query GetArticleBySlug($slug: String) {
+    nodeArticle({ slug: { eq: $slug }}) {
       title
       # whatever else you want!
     }
@@ -433,4 +440,59 @@ Specifically, we will want to do the following:
     - GraphiQL is _very_ helpful here!
 - Display this data in the BlogPost template
 
-<!-- TODO: add a screenshot -->
+We'll want to render this blog post as HTML. Consider the following query for grabbing HTML content from Markdown.
+
+```graphql
+{
+  # the slug will be a variable in your template, though :)
+  nodeArticle(fields:{slug:{eq:"/some-post"}}) {
+    title
+    fields {
+      markdownBody {
+        childMarkdownRemark {
+          html
+        }
+      }
+    }
+  }
+}
+```
+
+<details>
+  <summary>Need a little help?</summary>
+
+  ```jsx
+  import React from 'react'
+  import { graphql } from 'gatsby'
+
+  import Layout from '../components/layout'
+
+  export default function BlogPost({ data }) {
+    const { article } = data
+    return (
+      <Layout>
+        <div dangerouslySetInnerHTML={{ __html: article.fields.markdownBody.childMarkdownRemark.html }} />
+      </Layout>
+    ) 
+  }
+
+  export const blogPostQuery = graphql`
+    query GetBlogPostBySlug($slug: String!) {
+      article: nodeArticle(fields:{slug:{eq:$slug}}) {
+        fields {
+          markdownBody {
+            childMarkdownRemark {
+              html
+            }
+          }
+        }
+      }
+    }
+  `
+  ```
+
+</details>
+
+The end result should be linkable blog posts and blog posts that render their contents. Sounds like... a blog! It's all coming together 🎉
+
+![Blog template](../images/blog-post-template.png)

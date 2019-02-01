@@ -14,6 +14,12 @@ exports.onCreateNode = function onCreateNode({
 
     createNodeField({
       node,
+      name: `lab`,
+      value: !!node.fileAbsolutePath.match(/labs\//),
+    });
+
+    createNodeField({
+      node,
       name: `slug`,
       value: slug,
     });
@@ -24,9 +30,25 @@ exports.createPages = async function createPages({
   actions: { createPage },
   graphql,
 }) {
-  const result = await graphql(`
+  const { labs, allMdx } = await graphql(`
     {
-      labs: allMdx {
+      labs: allMdx(
+        filter: { fields: { lab: { eq: true } } }
+        sort: { fields: [fields___slug], order: ASC }
+      ) {
+        edges {
+          node {
+            frontmatter {
+              title
+            }
+            fields {
+              slug
+            }
+          }
+        }
+      }
+
+      allMdx(filter: { fields: { slug: { ne: "/" }, lab: { eq: false } } }) {
         edges {
           node {
             fields {
@@ -45,18 +67,24 @@ exports.createPages = async function createPages({
 
   const labTemplate = require.resolve(`./src/templates/lab.js`);
 
-  result.labs.edges
-    .filter(({ node }) => node.fields.slug !== `/`)
-    .forEach(({ node }) => {
-      const { slug } = node.fields;
-      createPage({
-        component: labTemplate,
-        path: slug,
-        context: {
-          slug: slug,
-        },
-      });
+  labs.edges.concat(allMdx.edges).forEach(({ node }, index) => {
+    const prev =
+      index === 0 || index === labs.edges.length
+        ? null
+        : labs.edges[index - 1].node;
+    const next =
+      index + 1 >= labs.edges.length ? null : labs.edges[index + 1].node;
+    const { slug } = node.fields;
+    createPage({
+      component: labTemplate,
+      path: slug,
+      context: {
+        slug: slug,
+        prev,
+        next,
+      },
     });
+  });
 };
 
 exports.onCreateWebpackConfig = ({ actions }) => {
