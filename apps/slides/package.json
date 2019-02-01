@@ -7,10 +7,10 @@
   "license": "MIT",
   "scripts": {
     "build": "mdx-deck build deck.js --webpack webpack.config.js --no-html",
-    "postbuild": "npm run build:pdf && cp -r dist/. ../workshop/public/slides",
+    "postbuild": "npm run copy && npm run build:pdf && cp -r dist/. ../workshop/public/slides",
+    "precopy": "mkdir -p dist/assets",
+    "copy": "find assets -type f -exec sharp -i '{}' -o dist/'{}' --quality 70 \\;",
     "build:pdf": "mdx-deck pdf deck.js",
-    "preoptimize": "mkdir -p dist/assets",
-    "optimize": "if-env NETLIFY=true && find assets -type f -exec ./node_modules/.bin/sharp -i '{}' -o dist/'{}' --quality 70 \\; || echo \"Not CI\"",
     "start": "mdx-deck deck.js --webpack webpack.config.js"
   },
   "devDependencies": {
