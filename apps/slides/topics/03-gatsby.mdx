@@ -1,5 +1,7 @@
 import { FullScreenCode, Main, Section, SectionInverted } from 'gatsby-mdx-theme'
 import { LiveCode } from 'mdx-deck-live-code'
+import { FullScreenImage } from '../layouts'
+import { Link } from '../components'
 
 export default SectionInverted
 
@@ -67,10 +69,43 @@ export default FullScreenCode
 
 ---
 
-## GraphQL
+# GraphQL
 
-- Plugins extend an internal GraphQL schema
-- This schema is queried and injected at _build time_ rather than run time
+---
+
+## A _query language_ for your API
+
+---
+
+export default FullScreenCode
+
+```graphql
+query {
+  user {
+    name
+    manager {
+      name
+    }
+  }
+}
+```
+
+---
+
+export default FullScreenCode
+
+```json
+{
+  "data": {
+    "user": {
+      "name": "Dustin Schau",
+      "manager": {
+        "name": "N/A"
+      }
+    }
+  }
+}
+```
 
 ---
 
@@ -82,7 +117,20 @@ export default FullScreenCode
 
 ---
 
-## A React component injected with GraphQL
+## Gatsby leverages GraphQL at _Build Time_ 🎉
+
+---
+
+## Gatsby parses queries in React components
+
+- Use (local) schema to query against
+- Parse queries, and inject components with data
+- No run-time cost _at all_ for this
+- e.g. you don't hit the CMS client-side
+
+---
+
+## Let's take a look
 
 ---
 
@@ -115,6 +163,26 @@ export const indexQuery = graphql`
 
 ---
 
+export default FullScreenCode
+
+```html
+<div id="___gatsby">
+  <h1>Your App Name</h1>
+</div>
+```
+
+---
+
 ## Gatsby is... amazing.
 
 ### Can't wait to dive in further in subsequent labs
+
+---
+
+export default FullScreenImage({ darken: 0.5, src: `https://media.giphy.com/media/11LKx7277LkE0M/giphy.gif` })
+
+## Lab 01
+
+### Getting Started and Set Up
+
+<Link href="/labs/01-set-up/">Take me to the Lab</Link>

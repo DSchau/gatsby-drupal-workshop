@@ -1,0 +1,37 @@
+import { Image } from 'mdx-deck'
+import { FullScreenCode, Main, Section, SectionInverted } from 'gatsby-mdx-theme'
+
+export default SectionInverted
+
+# `gatsby-node.js`
+
+---
+
+## The programatic extension point for Gatsby
+
+---
+
+- Creating pages
+- Sourcing data
+- Augmenting data
+- All using Node.js APIs
+
+---
+
+## What does this look like?
+
+### [Documentation](https://www.gatsbyjs.org/docs/node-apis/)
+
+---
+
+## Let's create a page
+
+---
+
+export default FullScreenCode
+
+```js
+exports.createPages = async function createPages({ actions, graphql }) {
+  // snip
+}
+```
