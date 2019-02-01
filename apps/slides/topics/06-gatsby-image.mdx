@@ -1,0 +1,206 @@
+import { Image } from 'mdx-deck'
+import { FullScreenCode, Main, Section, SectionInverted } from 'gatsby-mdx-theme'
+
+import { FullScreenImage} from '../layouts'
+import { Link } from '../components'
+
+export default SectionInverted
+
+# `gatsby-image`
+
+---
+
+## [Demo](https://using-gatsby-image.gatsbyjs.org/)
+
+---
+
+## You _want_ to use `gatsby-image`
+
+### It's amazing
+
+---
+
+- Responsive images
+- Optimized images
+- Lazy loaded images with an `IntersectionObserver`
+- Image filters (blur, color, size, etc.)
+
+---
+
+## How?
+
+---
+
+## An image node must exist
+
+### Plugins (like `gatsby-source-drupal`) can _link_ a remote image with a local image node
+
+---
+
+## This lets us use remote images, but tie into the many benefits this component provides
+
+---
+
+## Powered by GraphQL
+
+### (as are most things in Gatsby)
+
+---
+
+export default FullScreenCode
+
+```jsx
+export const templateQuery = graphql`
+  query TemplateQuery {
+    file(relativePath: { regex: "/some-image.jpg/" }) {
+      childImageSharp {
+        fluid(maxWidth: 500) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
+```
+
+---
+
+## OK... what the heck is `...GatsbyImageSharpFluid`
+
+---
+
+## [GraphQL Fragment](https://graphql.org/learn/queries/#fragments)
+
+### A way to _group_ a bunch of fields
+
+---
+
+## For instance, let's think of a responsive image
+
+### We want a `srcSet`, `height`, `width`, etc.
+
+---
+
+## We _do not want_ to type those same fields _every_ time
+
+---
+
+## Thus... `fragments`
+
+### [See all of the gatsby-image fragments](https://www.gatsbyjs.org/packages/gatsby-image/#fragments)
+
+---
+
+## Because we define the query shape (e.g. expected fields)... we can just pass directly to `gatsby-image`
+
+---
+
+export default FullScreenCode
+
+```jsx
+export const templateQuery = graphql`
+  query TemplateQuery {
+    file(relativePath: { regex: "/some-image.jpg/" }) {
+      childImageSharp {
+        fluid(maxWidth: 500) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
+```
+
+---
+
+export default FullScreenCode
+
+```jsx
+import React from 'react'
+import { graphql } from 'gatsby'
+import Image from 'gatsby-image'
+
+export default function Template({ data }) {
+  return <Image fluid={data.file.childImageSharp.fluid} />
+}
+```
+
+---
+
+## `fluid`
+
+### Adapts to its container (grows/shrinks)
+
+---
+
+## `fixed`
+
+### Statically sized (avatars, icons, etc.)
+
+---
+
+## But... what if I want to create a reusable component with an image?
+
+---
+
+## `StaticQuery`
+
+### A React component that renders GraphQL data in _any_ component
+
+### It "compiles itself away"
+
+---
+
+export default FullScreenCode
+
+```jsx
+import React from 'react'
+import { graphql, StaticQuery } from 'gatsby'
+
+// nothing too novel here!
+```
+
+---
+
+export default FullScreenCode
+
+```jsx
+export default function Header() {
+  return (
+    <StaticQuery
+      query={graphql`
+        {
+          site {
+            siteMetadata {
+              title
+            }
+          }
+        }
+      `}
+      render={data => <h1>{data.site.siteMetadata.title}</h1>}
+    />
+  )
+}
+```
+
+---
+
+### `query` (a GraphQL query)
+
+### `render` (a function invoked with the GraphQL query data)
+
+---
+
+## This might feel weird, but it's _extremely_ powerful!
+
+### You can create re-usable components based on dynamic data from GraphQL
+
+---
+
+export default FullScreenImage({ darken: 0.5, src: `https://media.giphy.com/media/RvJ5JEEdJXT3i/giphy.gif` })
+
+## Lab 03
+
+### Using Gatsby Image
+
+<Link href="/labs/03-using-gatsby-image/">Take me to the Lab</Link>
