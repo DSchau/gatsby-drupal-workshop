@@ -1,0 +1,73 @@
+import { Image } from 'mdx-deck'
+import { FullScreenCode, Main, Section, SectionInverted } from 'gatsby-mdx-theme'
+
+import { FullScreenImage} from '../layouts'
+import { Link } from '../components'
+
+export default SectionInverted
+
+# Search Engine Optimization
+
+---
+
+export default FullScreenImage({ src: `https://media.giphy.com/media/MwZlqh1go2M8w/giphy.gif` })
+
+---
+
+## You want this
+
+---
+
+## It's easy with Gatsby
+
+---
+
+## `react-helmet`
+
+### A library to render `meta` tags
+
+---
+
+## Gatsby uses SSR (at build time) to generate static content
+
+---
+
+## `meta` tags included
+
+### no JavaScript required!
+
+---
+
+export default FullScreenImage({ src: `https://media.giphy.com/media/EhpBNBiCaRmLe/giphy.gif` })
+
+## There are lots of... _layers_ here
+
+---
+
+## Gatsby provides you tooling to implement cleanly
+
+### `react-helmet`, static rendering, and GraphQL data layer = ❤️
+
+---
+
+## We also provide an SEO component
+
+### Sane, extensible defaults
+
+---
+
+export default FullScreenCode
+
+```jsx
+import React from 'react'
+
+import SEO from '../components/seo'
+
+export default function Template() {
+  return (
+    <div>
+      <SEO title="My great blog post" description="This damn well better be less than 160 characters" />
+    </div>
+  )
+}
+```

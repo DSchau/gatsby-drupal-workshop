@@ -4,6 +4,7 @@ import Gatsby from './topics/03-gatsby.mdx';
 import Drupal from './topics/04-drupal.mdx';
 import GatsbyNode from './topics/05-gatsby-node.mdx';
 import GatsbyImage from './topics/06-gatsby-image.mdx';
+import SEO from './topics/07-seo.mdx';
 
 import './fonts/Webfonts/futurapt_book_macroman/stylesheet.css';
 import './fonts/Webfonts/futurapt_bookitalic_macroman/stylesheet.css';
@@ -20,4 +21,5 @@ export default [
   ...Drupal,
   ...GatsbyNode,
   ...GatsbyImage,
+  ...SEO,
 ];
