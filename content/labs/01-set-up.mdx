@@ -2,13 +2,13 @@
 title: Set Up
 ---
 
-import Alert from 'src/components/alert'
+import Alert from 'src/components/alert';
 
 We're so happy to have you here learning all about Gatsby, and in particular, with integrating Gatsby with Drupal as a headless CMS.
 
 The central purpose of this first lab is to give everyone sufficient time to validate machine setup and get a local version of Gatsby and a headless Drupal instance created and running.
 
-If you haven't already, *start* with the [Set Up and Validation instructions here](/set-up/).
+If you haven't already, _start_ with the [Set Up and Validation instructions here](/set-up/).
 
 Once your environment has been validated, we can get up and running!
 
@@ -16,7 +16,10 @@ Once your environment has been validated, we can get up and running!
 
 <!-- TODO: Jesus -->
 
-<Alert type="info">For this training, we will be proving a Drupal instance already pre-configured for each one of the attendees.</Alert>
+<Alert type="info">
+  For this training, we will be proving a Drupal instance already pre-configured
+  for each one of the attendees.
+</Alert>
 
 This Drupal instance will be running on Digital Ocean, so you do not have to worry about getting a Drupal site setup locally.
 
@@ -25,32 +28,33 @@ This Drupal instance will be running on Digital Ocean, so you do not have to wor
 <details>
   <summary>Local Drupal Set-up Instructions</summary>
 
-  ## Drupal dependencies
-  * [git](https://git-scm.com/)
-  * [docker](https://www.docker.com/)
-  * [ahoy (ver 2)](https://github.com/ahoy-cli/ahoy)
+## Drupal dependencies
 
-  ## Drupal setup
+- [git](https://git-scm.com/)
+- [docker](https://www.docker.com/)
+- [ahoy (ver 2)](https://github.com/ahoy-cli/ahoy)
 
-  ```shell
-  # Clone repository
-  git clone git@github.com:weknowinc/drupal-boina.git
+## Drupal setup
 
-  # Copy .env file
-  cp .env.dist .env
+```shell
+# Clone repository
+git clone git@github.com:weknowinc/drupal-boina.git
 
-  # Add hostname entry in your /etc/hosts file
-  127.0.0.1    drupal-boina.develop
+# Copy .env file
+cp .env.dist .env
 
-  # Start containers
-  ahoy up
+# Add hostname entry in your /etc/hosts file
+127.0.0.1    drupal-boina.develop
 
-  # Install Composer dependencies
-  ahoy composer install
+# Start containers
+ahoy up
 
-  # Install Boina distribution
-  ahoy drupal boina:install
-  ```
+# Install Composer dependencies
+ahoy composer install
+
+# Install Boina distribution
+ahoy drupal boina:install
+```
 
 </details>
 
@@ -60,7 +64,12 @@ Now that Drupal has been set-up _and_ our dependencies have been installed, we c
 
 First, just to validate that content hasn't changed upstream (e.g. in the parent repo), we can sync with upstream.
 
-<Alert type="info">If you haven't set up upstream, run: <code>git remote add upstream https://github.com/dschau/gatsby-drupal-blog</code></Alert>
+<Alert type="info">
+  If you haven't set up upstream, run:{' '}
+  <code>
+    git remote add upstream https://github.com/dschau/gatsby-drupal-blog
+  </code>
+</Alert>
 
 ```shell
 git fetch upstream master
@@ -90,14 +99,16 @@ Open up this file and replace the environment variables with the values you obta
     Sample .env.development file
   </summary>
 
-  ```shell
-  DRUPAL_USERNAME=your-usernmae
-  DRUPAL_PASSWORD=hunter2
-  ```
+```shell
+DRUPAL_USERNAME=your-usernmae
+DRUPAL_PASSWORD=hunter2
+```
+
 </details>
 
 <Alert type="info">
-  Note: you can check out <code>gatsby-config.js</code> for further info to see how these environment variables are used.
+  Note: you can check out <code>gatsby-config.js</code> for further info to see
+  how these environment variables are used.
 </Alert>
 
 Almost ready! Now if you run
@@ -118,18 +129,18 @@ First - create the necessary component with:
 touch src/components/footer.js
 ```
 
-<Alert type="info">If on a non-Unix OS, just create the file with your IDE or Explorer!</Alert>
+<Alert type="info">
+  If on a non-Unix OS, just create the file with your IDE or Explorer!
+</Alert>
 
 Next, we want to take the `footer` structure that is in layout, and encapsulate in the `Footer` component we created. Here's an empty structure you can use:
 
 ```jsx
-import React from 'react'
+import React from 'react';
 
 export default function Footer() {
   // TODO: replace with footer JSX
-  return (
-    null
-  )
+  return null;
 }
 ```
 
@@ -143,6 +154,9 @@ Note that for **every** subsequent lab, the start steps will be the same. You wi
 
 - Copy over existing `.env` files from previous lab(s)--note these will not change, so feel free to just copy them!
 - `cd` to the current lab, e.g. `cd labs/01-set-up/`
-- Run `yarn start` to boot-up the local development server 
+- Run `yarn start` to boot-up the local development server
 
-<Alert type="warn">Note: remember to exit out of the process (Ctrl + C) to close the local development server.</Alert>
+<Alert type="warn">
+  Note: remember to exit out of the process (Ctrl + C) to close the local
+  development server.
+</Alert>

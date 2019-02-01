@@ -3,5 +3,5 @@ module.exports = {
     'eslint --ignore-path .gitignore --ignore-path .prettierignore --fix',
     'git add',
   ],
-  '*.{md,yaml}': ['prettier --write', 'git add'],
+  '*.{md,mdx,yaml}': ['prettier --write', 'git add'],
 };

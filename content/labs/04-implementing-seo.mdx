@@ -21,7 +21,7 @@ This SEO component is a regular React component, so it can be imported and used 
 First things first, you'll want to import the `SEO` component like so:
 
 ```jsx
-import SEO from '../components/seo'
+import SEO from '../components/seo';
 ```
 
 Once it's available, we can render it in the body of our `BlogPost` component. Go ahead and render it with dummy data, e.g.
@@ -38,16 +38,16 @@ Specifically, we will want to query for the following, additional details:
 
 - `title` (you may already have this!)
 - `description` (note: `childMarkdownRemark` contains an `excerpt` field)
-    ```graphql
-    {
-      childMarkdownRemark {
-        excerpt(pruneLength: 160)
-      }
+  ```graphql
+  {
+    childMarkdownRemark {
+      excerpt(pruneLength: 160)
     }
-    ```
+  }
+  ```
 - A `featured_image`
-    - This is provided by Drupal in _every_ article. See the sample query below for an example
-    - Our previous example with the `Bio` component will be _very_ helpful here!
+  - This is provided by Drupal in _every_ article. See the sample query below for an example
+  - Our previous example with the `Bio` component will be _very_ helpful here!
 
 On the image in particular, note that there is a `resize` property of `childImageSharp` that is very helpful! Note that a recommended width is `1200` for general SEO purposes. Consider the following query if it's helpful!
 
@@ -67,11 +67,11 @@ On the image in particular, note that there is a `resize` property of `childImag
 
 Wrapping it all up, you'll use this SEO component with the following meta tags, passed as an array of objects:
 
-|`property`|`content`|
-|:--------:|---------|
-|`og:image`|path to an image|
-|`og:image:height`|height of an image (do not include `px`)|
-|`og:image:width`|width of an image (do not include `px`)|
+|    `property`     | `content`                                |
+| :---------------: | ---------------------------------------- |
+|    `og:image`     | path to an image                         |
+| `og:image:height` | height of an image (do not include `px`) |
+| `og:image:width`  | width of an image (do not include `px`)  |
 
 Once completed, test your SEO by inspecting the `head` tags with the browser devtools. They should look something like the below:
 

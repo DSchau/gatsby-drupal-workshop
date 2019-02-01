@@ -1,10 +1,15 @@
-import { Image } from 'mdx-deck'
-import { FullScreenCode, Main, Section, SectionInverted } from 'gatsby-mdx-theme'
+import { Image } from 'mdx-deck';
+import {
+  FullScreenCode,
+  Main,
+  Section,
+  SectionInverted,
+} from 'gatsby-mdx-theme';
 
-import { FullScreenImage} from '../layouts'
-import { Link } from '../components'
+import { FullScreenImage } from '../layouts';
+import { Link } from '../components';
 
-export default SectionInverted
+export default SectionInverted;
 
 # `gatsby-node.js`
 
@@ -31,12 +36,12 @@ export default SectionInverted
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```js
 exports.createPages = async function createPages({ actions, graphql }) {
   // snip
-}
+};
 ```
 
 ---
@@ -71,33 +76,33 @@ const { createPage, createNodeField, createRedirect, ... } = actions
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
-import React from 'react'
+import React from 'react';
 
 export default function Template() {
-  return <h1>This is a template!</h1>
+  return <h1>This is a template!</h1>;
 }
 ```
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
-const path = require('path')
+const path = require('path');
 exports.createPages = async function createPages({ actions }) {
-  const template = path.resolve('src/templates/template.js')
+  const template = path.resolve('src/templates/template.js');
   createPage({
     component: template,
     path: `/hello-world`,
     context: {
       hello: true,
-      world: true
-    }
-  })
-}
+      world: true,
+    },
+  });
+};
 ```
 
 ---
@@ -112,7 +117,7 @@ exports.createPages = async function createPages({ actions }) {
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
 const result = await graphql(`
@@ -125,8 +130,7 @@ const result = await graphql(`
       }
     }
   }
-`)
-  .then(res => res.data)
+`).then(res => res.data);
 ```
 
 ---
@@ -146,19 +150,19 @@ const result = await graphql(`
 ### This is used in a page or template component
 
 ```jsx
-import { graphql } from 'gatsby'
+import { graphql } from 'gatsby';
 ```
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from 'react';
+import { graphql } from 'gatsby';
 
 export default function Template() {
-  return <h1>This is a template!</h1>
+  return <h1>This is a template!</h1>;
 }
 
 // let's add this here
@@ -166,7 +170,7 @@ export default function Template() {
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
 export const templateQuery = graphql`
@@ -177,7 +181,7 @@ export const templateQuery = graphql`
       }
     }
   }
-`
+`;
 ```
 
 ---
@@ -188,11 +192,11 @@ export const templateQuery = graphql`
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
 export default function Template({ data }) {
-  return <h1>Hello from {data.site.siteMetadata.title}</h1>
+  return <h1>Hello from {data.site.siteMetadata.title}</h1>;
 }
 
 // the query
@@ -200,7 +204,10 @@ export default function Template({ data }) {
 
 ---
 
-export default FullScreenImage({ darken: 0.5, src: `https://media.giphy.com/media/ZY5MCSF22yYkE/giphy.gif` })
+export default FullScreenImage({
+  darken: 0.5,
+  src: `https://media.giphy.com/media/ZY5MCSF22yYkE/giphy.gif`,
+});
 
 ## Lab 02
 

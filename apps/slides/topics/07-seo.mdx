@@ -1,16 +1,25 @@
-import { Image } from 'mdx-deck'
-import { FullScreenCode, Main, Section, SectionInverted } from 'gatsby-mdx-theme'
+import { Image } from 'mdx-deck';
+import {
+  FullScreenCode,
+  Main,
+  Section,
+  SectionInverted,
+} from 'gatsby-mdx-theme';
 
-import { FullScreenImage} from '../layouts'
-import { Link } from '../components'
+import { FullScreenImage } from '../layouts';
+import { Link } from '../components';
 
-export default SectionInverted
+export default SectionInverted;
 
 # Search Engine Optimization
 
+## Hereafter SEO because... optimization.
+
 ---
 
-export default FullScreenImage({ src: `https://media.giphy.com/media/MwZlqh1go2M8w/giphy.gif` })
+export default FullScreenImage({
+  src: `https://media.giphy.com/media/MwZlqh1go2M8w/giphy.gif`,
+});
 
 ---
 
@@ -38,7 +47,9 @@ export default FullScreenImage({ src: `https://media.giphy.com/media/MwZlqh1go2M
 
 ---
 
-export default FullScreenImage({ src: `https://media.giphy.com/media/EhpBNBiCaRmLe/giphy.gif` })
+export default FullScreenImage({
+  src: `https://media.giphy.com/media/EhpBNBiCaRmLe/giphy.gif`,
+});
 
 ## There are lots of... _layers_ here
 
@@ -56,18 +67,72 @@ export default FullScreenImage({ src: `https://media.giphy.com/media/EhpBNBiCaRm
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
-import React from 'react'
+import React from 'react';
 
-import SEO from '../components/seo'
+import SEO from '../components/seo';
 
 export default function Template() {
   return (
     <div>
-      <SEO title="My great blog post" description="This damn well better be less than 160 characters" />
+      <SEO
+        title="My great blog post"
+        description="This damn well better be less than 160 characters"
+      />
     </div>
-  )
+  );
 }
 ```
+
+---
+
+## Once-more, use GraphQL data layer to our advantage
+
+---
+
+## We can query for excerpts, titles, and... images!
+
+---
+
+## Social sharing cards ez pz
+
+---
+
+export default FullScreenCode;
+
+```graphql
+{
+  file(relativePath: { regex: "/some-image.jpg/" }) {
+    childImageSharp {
+      resize(width: 1200) {
+        src
+        height
+        width
+      }
+    }
+  }
+}
+```
+
+---
+
+<img src="assets/social-sharing.png" style={{ maxHeight: '70vh' }} />
+
+---
+
+## [Read all about it](https://blog.dustinschau.com/search-engine-optimization-with-gatsby)
+
+---
+
+export default FullScreenImage({
+  darken: 0.25,
+  src: `https://media.giphy.com/media/6s7mSIPWYALTDOBwID/giphy.gif`,
+});
+
+## Lab 04
+
+### Implementing SEO
+
+<Link href="/labs/04-implementing-seo/">Take me to the Lab</Link>

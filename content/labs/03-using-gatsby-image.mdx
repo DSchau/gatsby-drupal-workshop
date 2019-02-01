@@ -23,10 +23,10 @@ touch src/components/bio.js
 We will need to create a "shell" component, so create it initially with the following structure:
 
 ```jsx
-import React from 'react'
+import React from 'react';
 
 export default function Bio() {
-  return null
+  return null;
 }
 ```
 
@@ -51,36 +51,36 @@ We will want to grab the `html` from the `childMarkdownRemark` and we'll also wa
 <details>
   <summary>Need a hint?</summary>
 
-  ```graphql
-  {
-    bio: nodePage(title:{eq:"Bio"}) {
-      relationships {
-        field_image {
-          relationships {
-            field_media_image {
-              localFile {
-                # note the below is not supported in GraphiQL
-                # but it will work in your React component!
-                childImageSharp {
-                  fixed(height:48) {
-                    ...GatsbyImageSharpFixed
-                  }
+```graphql
+{
+  bio: nodePage(title: { eq: "Bio" }) {
+    relationships {
+      field_image {
+        relationships {
+          field_media_image {
+            localFile {
+              # note the below is not supported in GraphiQL
+              # but it will work in your React component!
+              childImageSharp {
+                fixed(height: 48) {
+                  ...GatsbyImageSharpFixed
                 }
               }
             }
           }
         }
       }
-      fields {
-        markdownBody {
-          childMarkdownRemark {
-            html
-          }
+    }
+    fields {
+      markdownBody {
+        childMarkdownRemark {
+          html
         }
       }
     }
   }
-  ```
+}
+```
 
 </details>
 
@@ -91,8 +91,8 @@ Now that we've written a query that retrieves a field image _and_ the html from 
 We are going to use a `StaticQuery`. A `StaticQuery` is special in that it doesn't accept variables and works in _any_ React component in our `src` directory, so it's a perfect use for our Bio component. For an example of how to use this, check out the below example:
 
 ```jsx
-import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
+import React from 'react';
+import { StaticQuery, graphql } from 'gatsby';
 
 export default function Author() {
   return (
@@ -106,11 +106,9 @@ export default function Author() {
           }
         }
       `}
-      render={data => (
-        <h1>{data.site.siteMetadata.author}</h1>
-      )}
+      render={data => <h1>{data.site.siteMetadata.author}</h1>}
     />
-  )
+  );
 }
 ```
 
@@ -120,86 +118,94 @@ With this in mind, we will want to:
 - Pass the query to our React component
 - Render this data in our React component
 - Use the `gatsby-image` component to render a `fixed` image, e.g. consider the following example
-    ```jsx
-    import React from 'react'
-    import { StaticQuery, graphql } from 'gatsby'
-    import Image from 'gatsby-image'
-
-    export default function Avatar() {
-      return (
-        <StaticQuery
-          query={graphql`
-            {
-              file(relativePath: { regex: "/some-image.jpg/"}) {
-                childImageSharp {
-                  fixed(width: 48) {
-                    ...GatsbyImageSharpFixed
-                  }
-                }
-              }
-            }
-          `}
-          render={data => (
-            <Image fixed={data.file.childImageSharp.fixed} />
-          )}
-        />
-      )
-    }
-    ```
-
-<details>
-  <summary>Need a little help?</summary>
 
   ```jsx
-  import React from 'react'
-  import { StaticQuery, graphql } from 'gatsby'
-  import Image from 'gatsby-image'
+  import React from 'react';
+  import { StaticQuery, graphql } from 'gatsby';
+  import Image from 'gatsby-image';
 
-  import styles from './bio.module.css'
-
-  export default function Bio() {
+  export default function Avatar() {
     return (
       <StaticQuery
         query={graphql`
           {
-            bio: nodePage(title:{eq:"Bio"}) {
-              relationships {
-                field_image {
-                  relationships {
-                    field_media_image {
-                      localFile {
-                        childImageSharp {
-                            fixed(height:48) {
-                              ...GatsbyImageSharpFixed
-                            }
-                          }
-                      }
-                    }
-                  }
-                }
-              }
-              fields {
-                markdownBody {
-                  childMarkdownRemark {
-                    html
-                  }
+            file(relativePath: { regex: "/some-image.jpg/" }) {
+              childImageSharp {
+                fixed(width: 48) {
+                  ...GatsbyImageSharpFixed
                 }
               }
             }
           }
         `}
-        render={data => (
-          (
-            <div className={styles.bio}>
-              <Image className={styles.avatar} fixed={data.bio.relationships.field_image.relationships.field_media_image.localFile.childImageSharp.fixed} />
-              <div className={styles.description} dangerouslySetInnerHTML={{ __html: data.bio.fields.markdownBody.childMarkdownRemark.html }} />
-            </div>
-          )
-        )}
+        render={data => <Image fixed={data.file.childImageSharp.fixed} />}
       />
-    )
+    );
   }
   ```
+
+<details>
+  <summary>Need a little help?</summary>
+
+```jsx
+import React from 'react';
+import { StaticQuery, graphql } from 'gatsby';
+import Image from 'gatsby-image';
+
+import styles from './bio.module.css';
+
+export default function Bio() {
+  return (
+    <StaticQuery
+      query={graphql`
+        {
+          bio: nodePage(title: { eq: "Bio" }) {
+            relationships {
+              field_image {
+                relationships {
+                  field_media_image {
+                    localFile {
+                      childImageSharp {
+                        fixed(height: 48) {
+                          ...GatsbyImageSharpFixed
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            fields {
+              markdownBody {
+                childMarkdownRemark {
+                  html
+                }
+              }
+            }
+          }
+        }
+      `}
+      render={data => (
+        <div className={styles.bio}>
+          <Image
+            className={styles.avatar}
+            fixed={
+              data.bio.relationships.field_image.relationships.field_media_image
+                .localFile.childImageSharp.fixed
+            }
+          />
+          <div
+            className={styles.description}
+            dangerouslySetInnerHTML={{
+              __html: data.bio.fields.markdownBody.childMarkdownRemark.html,
+            }}
+          />
+        </div>
+      )}
+    />
+  );
+}
+```
 
 </details>
 
@@ -212,9 +218,9 @@ We'd now like to actually _use_ this component in various pages, particularly we
 In React, you `import` components that you intend to re-use. For instance, if we have a `Header` component in `src/components/header.js`, we can _use_ this component like so in `src/components/layout.js`:
 
 ```jsx
-import React from 'react'
+import React from 'react';
 
-import Header from './header'
+import Header from './header';
 
 export default function Layout({ children }) {
   return (
@@ -222,7 +228,7 @@ export default function Layout({ children }) {
       <Header />
       <main>{children}</main>
     </div>
-  )
+  );
 }
 ```
 

@@ -1,18 +1,21 @@
-import { Image } from 'mdx-deck'
-import { FullScreenCode, Main, Section, SectionInverted } from 'gatsby-mdx-theme'
+import { Image } from 'mdx-deck';
+import {
+  FullScreenCode,
+  Main,
+  Section,
+  SectionInverted,
+} from 'gatsby-mdx-theme';
 
-import { FullScreenImage} from '../layouts'
-import { Link } from '../components'
+import { FullScreenImage } from '../layouts';
+import { Link } from '../components';
 
-export default SectionInverted
+export default SectionInverted;
 
 # `gatsby-image`
 
 ---
 
-<a href="https://stripe.com/environment" rel="noopener noreferer" target="_blank">
-  <img alt="Stripe - an example of good image loading" src="assets/stripe.png" style={{ maxHeight: '70vh'}} />
-</a>
+[![Stripe](assets/stripe.png)](https://stripe.com/environment)
 
 ---
 
@@ -53,7 +56,7 @@ export default SectionInverted
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
 export const templateQuery = graphql`
@@ -66,7 +69,7 @@ export const templateQuery = graphql`
       }
     }
   }
-`
+`;
 ```
 
 ---
@@ -101,7 +104,7 @@ export const templateQuery = graphql`
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
 export const templateQuery = graphql`
@@ -114,20 +117,20 @@ export const templateQuery = graphql`
       }
     }
   }
-`
+`;
 ```
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
-import React from 'react'
-import { graphql } from 'gatsby'
-import Image from 'gatsby-image'
+import React from 'react';
+import { graphql } from 'gatsby';
+import Image from 'gatsby-image';
 
 export default function Template({ data }) {
-  return <Image fluid={data.file.childImageSharp.fluid} />
+  return <Image fluid={data.file.childImageSharp.fluid} />;
 }
 ```
 
@@ -157,18 +160,18 @@ export default function Template({ data }) {
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
-import React from 'react'
-import { graphql, StaticQuery } from 'gatsby'
+import React from 'react';
+import { graphql, StaticQuery } from 'gatsby';
 
 // nothing too novel here!
 ```
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
 export default function Header() {
@@ -185,7 +188,7 @@ export default function Header() {
       `}
       render={data => <h1>{data.site.siteMetadata.title}</h1>}
     />
-  )
+  );
 }
 ```
 
@@ -203,7 +206,10 @@ export default function Header() {
 
 ---
 
-export default FullScreenImage({ darken: 0.5, src: `https://media.giphy.com/media/RvJ5JEEdJXT3i/giphy.gif` })
+export default FullScreenImage({
+  darken: 0.5,
+  src: `https://media.giphy.com/media/RvJ5JEEdJXT3i/giphy.gif`,
+});
 
 ## Lab 03
 

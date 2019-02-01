@@ -22,17 +22,17 @@ We now need to manually create the Netlify instance by syncing with our Github r
 
 1. Log in
 1. Press "New site from Git" in the upper right corner
-    ![Netlify New site](../images/netlify/new-site-from-git.png)
+   ![Netlify New site](../images/netlify/new-site-from-git.png)
 1. Connect with GitHub
-    ![Connect to GitHub](../images/netlify/connect-to-github.png)
+   ![Connect to GitHub](../images/netlify/connect-to-github.png)
 1. Search for and add your forked repository
 1. Press "Deploy site"
 1. Press "Site settings"
-    - Feel free to change your site name here!
-    - Do **make a note** of the deployed URL; we'll re-use it in a bit!
+   - Feel free to change your site name here!
+   - Do **make a note** of the deployed URL; we'll re-use it in a bit!
 1. Configure environment variables in `Build & Deploy`
-    - Because Netlify does not know about the environment variables stored in your `.env` files (and this is a good thing--we don't _want_ to commit these to source control!), we will need to add environment variables
-    - We will want to expose the _same_ variables in our `.env.development` or `.env.production` file (these should generally be the same)
+   - Because Netlify does not know about the environment variables stored in your `.env` files (and this is a good thing--we don't _want_ to commit these to source control!), we will need to add environment variables
+   - We will want to expose the _same_ variables in our `.env.development` or `.env.production` file (these should generally be the same)
 
 Once done, we will want to trigger a _new_ deploy (the first one should fail with missing variables!) and we _should_ be able to preview our new site! Woo hoo!!
 
@@ -61,15 +61,15 @@ Finally, if we open up `src/pages/article.js`, we can prepend the siteUrl to get
 <details>
   <summary>Need help grabbing the siteUrl?</summary>
 
-  ```graphql
-  {
-    site {
-      siteMetadata {
-        siteUrl # use this in the existing GraphQL query
-      }
+```graphql
+{
+  site {
+    siteMetadata {
+      siteUrl # use this in the existing GraphQL query
     }
   }
-  ```
+}
+```
 
 </details>
 

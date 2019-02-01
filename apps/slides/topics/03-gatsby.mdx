@@ -1,11 +1,17 @@
-import { FullScreenCode, Main, Section, SectionInverted } from 'gatsby-mdx-theme'
-import { LiveCode } from 'mdx-deck-live-code'
-import { FullScreenImage } from '../layouts'
-import { Link } from '../components'
+import {
+  FullScreenCode,
+  Main,
+  Section,
+  SectionInverted,
+} from 'gatsby-mdx-theme';
+import { LiveCode } from 'mdx-deck-live-code';
+import { FullScreenImage } from '../layouts';
+import { Link } from '../components';
 
-export default SectionInverted
+export default SectionInverted;
 
 ## Gatsby
+
 ### A modern app compiler for React
 
 ---
@@ -26,12 +32,16 @@ export default SectionInverted
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
 <div id="___gatsby">
-  <header><h1>Hello World</h1></header>
-  <main><p>This is some content</p></main>
+  <header>
+    <h1>Hello World</h1>
+  </header>
+  <main>
+    <p>This is some content</p>
+  </main>
 </div>
 ```
 
@@ -77,7 +87,7 @@ export default FullScreenCode
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```graphql
 query {
@@ -92,7 +102,7 @@ query {
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```json
 {
@@ -112,7 +122,10 @@ export default FullScreenCode
 ## GraphiQL
 
 <div>
-  <iframe src="https://711808k40x.sse.codesandbox.io/___graphql?query=%7B%0A%20%20site%20%7B%0A%20%20%20%20siteMetadata%20%7B%0A%20%20%20%20%20%20title%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A" style={{ height: '80vh', width: '80vw' }} />
+  <iframe
+    src="https://711808k40x.sse.codesandbox.io/___graphql?query=%7B%0A%20%20site%20%7B%0A%20%20%20%20siteMetadata%20%7B%0A%20%20%20%20%20%20title%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A"
+    style={{ height: '80vh', width: '80vw' }}
+  />
 </div>
 
 ---
@@ -134,14 +147,14 @@ export default FullScreenCode
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```jsx
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from 'react';
+import { graphql } from 'gatsby';
 
 export default function IndexPage({ data }) {
-  return <h1>{data.site.siteMetadata.title}</h1>
+  return <h1>{data.site.siteMetadata.title}</h1>;
 }
 
 export const indexQuery = graphql`
@@ -152,7 +165,7 @@ export const indexQuery = graphql`
       }
     }
   }
-`
+`;
 ```
 
 ---
@@ -163,7 +176,7 @@ export const indexQuery = graphql`
 
 ---
 
-export default FullScreenCode
+export default FullScreenCode;
 
 ```html
 <div id="___gatsby">
@@ -181,7 +194,10 @@ export default FullScreenCode
 
 ---
 
-export default FullScreenImage({ darken: 0.5, src: `https://media.giphy.com/media/11LKx7277LkE0M/giphy.gif` })
+export default FullScreenImage({
+  darken: 0.5,
+  src: `https://media.giphy.com/media/11LKx7277LkE0M/giphy.gif`,
+});
 
 ## Lab 01
 
